@@ -27,5 +27,13 @@ public class ArrayTester {
         //arrayContainer.insert(5,41);
         //System.out.println(arrayContainer.toString());
 
+        SortedArrayContainer sortedArrayContainer=new SortedArrayContainer(100);
+        sortedArrayContainer.insert(10);
+        sortedArrayContainer.insert(20);
+        System.out.println(sortedArrayContainer);
+        sortedArrayContainer.insert(15);
+        sortedArrayContainer.insert(12);
+        System.out.println(sortedArrayContainer);
+
     }
 }
