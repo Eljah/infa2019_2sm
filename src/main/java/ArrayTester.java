@@ -6,6 +6,22 @@ public class ArrayTester {
         ArrayContainer arrayContainer=new ArrayContainer(100);
         arrayContainer.insert(10);
         arrayContainer.insert(20);
+        //System.out.println(arrayContainer.readUnit(0));
+        //System.out.println(arrayContainer.readUnit(1));
+        //System.out.println(arrayContainer.readUnit(5));
+        arrayContainer.insert(15);
+        arrayContainer.insert(30);
+        arrayContainer.insert(31);
+
         System.out.println(arrayContainer.toString());
+        arrayContainer.remove(1);
+        System.out.println(arrayContainer.toString());
+        arrayContainer.remove(2);
+        System.out.println(arrayContainer.toString());
+        arrayContainer.remove(3);
+        System.out.println(arrayContainer.toString());
+        arrayContainer.remove(3);
+        System.out.println(arrayContainer.toString());
+
     }
 }
