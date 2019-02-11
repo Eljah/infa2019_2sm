@@ -25,7 +25,7 @@ public class ArrayContainer {
 
     public void remove(int index) {
         if (index <= this.capacity) {
-            for (int i = index; i <= capacity; i++) {
+            for (int i = index; i < capacity; i++) {
                 this.array[i] = this.array[i + 1];
             }
             this.array[capacity--] = 0;
@@ -33,6 +33,10 @@ public class ArrayContainer {
             throw new IndexOutOfBoundsException("Our internal capacity index is smaller than requested in remove operation");
         }
     }
+
+    //public void insert(int) {
+    //
+    //}
 
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

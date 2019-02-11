@@ -18,10 +18,10 @@ public class ArrayTester {
         System.out.println(arrayContainer.toString());
         arrayContainer.remove(2);
         System.out.println(arrayContainer.toString());
-        arrayContainer.remove(3);
-        System.out.println(arrayContainer.toString());
-        arrayContainer.remove(3);
-        System.out.println(arrayContainer.toString());
+        //arrayContainer.remove(3);
+        //System.out.println(arrayContainer.toString());
+        //arrayContainer.remove(3);
+        //System.out.println(arrayContainer.toString());
 
     }
 }
