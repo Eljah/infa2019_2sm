@@ -22,6 +22,10 @@ public class ArrayTester {
         //System.out.println(arrayContainer.toString());
         //arrayContainer.remove(3);
         //System.out.println(arrayContainer.toString());
+        arrayContainer.insert(2,41);
+        System.out.println(arrayContainer.toString());
+        //arrayContainer.insert(5,41);
+        //System.out.println(arrayContainer.toString());
 
     }
 }
