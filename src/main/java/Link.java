@@ -12,4 +12,12 @@ public class Link {
     {
         return link!=null;
     }
+
+    public void setLink(Link link) {
+        this.link = link;
+    }
+
+    public Link getLink() {
+        return link;
+    }
 }

@@ -20,19 +20,21 @@ public class LinksContainer {
         {
             stringBuilder.append(current.value);
             stringBuilder.append(" ");
+            while (current.hasNext())
+            {
+                stringBuilder.append(current.link.value);
+                stringBuilder.append(" ");
+                current=current.link;
+            }
         }
 
-        while (current.hasNext())
-        {
-            stringBuilder.append(current.link.value);
-            stringBuilder.append(" ");
-            current=current.link;
-        }
         return stringBuilder.toString();
     }
 
     public void remove()
     {
-        this.first=first.link;
+        if (first!=null) {
+            this.first = first.link;
+        }
     }
 }

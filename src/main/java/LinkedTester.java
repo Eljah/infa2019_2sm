@@ -8,5 +8,14 @@ public class LinkedTester {
         linksContainer.remove();
         System.out.println(linksContainer.toString());
 
+
+        SortedLinksContainer sortedLinksContainer = new SortedLinksContainer();
+        sortedLinksContainer.insert(3);
+        //sortedLinksContainer.insert(20);
+        //sortedLinksContainer.insert(1);
+        sortedLinksContainer.remove();
+
+        System.out.println(sortedLinksContainer);
+
     }
 }
