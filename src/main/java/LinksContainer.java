@@ -30,4 +30,9 @@ public class LinksContainer {
         }
         return stringBuilder.toString();
     }
+
+    public void remove()
+    {
+        this.first=first.link;
+    }
 }

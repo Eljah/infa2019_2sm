@@ -5,5 +5,8 @@ public class LinkedTester {
         linksContainer.insert(10);
         linksContainer.insert(30);
         System.out.println(linksContainer.toString());
+        linksContainer.remove();
+        System.out.println(linksContainer.toString());
+
     }
 }
