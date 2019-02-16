@@ -1,3 +1,5 @@
+package containers.linked;
+
 public class SortedLinksContainer {
     private Link first;
 

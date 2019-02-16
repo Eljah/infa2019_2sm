@@ -1,3 +1,5 @@
+package containers.linked;
+
 public class LinkedTester {
     public static void main(String[] args) {
         LinksContainer linksContainer=new LinksContainer();

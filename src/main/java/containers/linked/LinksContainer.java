@@ -1,3 +1,5 @@
+package containers.linked;
+
 public class LinksContainer {
     private Link first;
 

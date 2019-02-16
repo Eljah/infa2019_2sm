@@ -1,3 +1,5 @@
+package containers.linked;
+
 public class Link {
     public long value;
     public Link link;
