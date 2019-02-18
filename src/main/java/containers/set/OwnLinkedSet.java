@@ -5,11 +5,14 @@ import java.util.Iterator;
 import java.util.Set;
 
 public class OwnLinkedSet implements Set, Displayeble {
+    //todo internal structure
+
     public int size() {
         return 0;
     }
 
     public boolean isEmpty() {
+        //todo is empty
         return false;
     }
 
@@ -26,6 +29,7 @@ public class OwnLinkedSet implements Set, Displayeble {
     }
 
     public boolean add(Object o) {
+        //todo uniqur instsert
         return false;
     }
 
@@ -58,6 +62,6 @@ public class OwnLinkedSet implements Set, Displayeble {
     }
 
     public void display() {
-
+        //todo
     }
 }
