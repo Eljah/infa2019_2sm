@@ -23,6 +23,13 @@ public class TestContainers {
         linkContainer.insert(202);
         print(linkContainer);
 
+        List<Object> students=new ArrayList<Object>();
+        students.add(new Student());
+        students.add(new Object());
+
+        List<Student> students2=new ArrayList<Student>();
+        students2.add(new Student());
+        //students2.add(new Object());  <!-- will not work because of generic on Student
         }
 
     static void print(Container arrayContainer)
