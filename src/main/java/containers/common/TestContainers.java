@@ -3,6 +3,8 @@ package containers.common;
 import containers.array.ArrayContainer;
 import containers.linked.LinksContainer;
 
+import java.util.*;
+
 public class TestContainers {
     public static void main(String[] args) {
         Container arrayContainer=new ArrayContainer(1000);
@@ -20,6 +22,7 @@ public class TestContainers {
         linkContainer.insert(201);
         linkContainer.insert(202);
         print(linkContainer);
+
         }
 
     static void print(Container arrayContainer)
