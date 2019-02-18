@@ -1,6 +1,8 @@
 package containers.linked;
 
-public class LinksContainer {
+import containers.common.Container;
+
+public class LinksContainer implements Container {
     private Link first;
 
     public LinksContainer(){
@@ -12,6 +14,10 @@ public class LinksContainer {
         Link link=new Link(value);
         link.link=first;
         this.first=link;
+    }
+
+    public void display() {
+        System.out.println(this.toString());
     }
 
     public String toString()

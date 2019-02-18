@@ -1,9 +1,11 @@
 package containers.array;
 
+import containers.common.Container;
+
 /**
  * Created by Ilya Evlampiev on 11.02.2019.
  */
-public class ArrayContainer {
+public class ArrayContainer implements Container {
 
     private long[] array;
     private int capacity;
@@ -58,4 +60,7 @@ public class ArrayContainer {
         return stringBuilder.toString();
     }
 
+    public void display() {
+        System.out.println(this.toString());
+    }
 }
