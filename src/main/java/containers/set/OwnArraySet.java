@@ -6,14 +6,23 @@ import java.util.Set;
 
 public class OwnArraySet implements Set, Displayeble {
     //todo internal structure
+    private int capacity;
+    private Object[] array;
+
+    public OwnArraySet(int max){
+        this.array = new Object[max];
+        this.capacity = -1;
+    }
 
     public int size() {
         return 0;
     }
 
     public boolean isEmpty() {
-        //todo is empty
-        return false;
+        if(capacity>-1){
+            return false;
+        }
+        return true;
     }
 
     public boolean contains(Object o) {
@@ -28,9 +37,16 @@ public class OwnArraySet implements Set, Displayeble {
         return new Object[0];
     }
 
-    public boolean add(Object o) {
-        //todo uniqur instsert
-        return false;
+    public boolean add(Object value) {
+       int k=0;
+        for(int i=0;i<capacity;i++){
+           if(this.array[i]==value){
+               return false;
+           }
+
+       }
+       this.array[++this.capacity] = value;
+       return  true;
     }
 
     public boolean remove(Object o) {
@@ -62,6 +78,8 @@ public class OwnArraySet implements Set, Displayeble {
     }
 
     public void display() {
-        //todo
+        for (int i = 0; i <capacity ; i++) {
+            System.out.print(array[i]+" ");
+        }
     }
 }
