@@ -7,19 +7,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class OwnLinkedList  implements List, Displayeble {
+public class OwnLinkedList<E>  implements List<E>, Displayeble {
+    //todo
+
+
     @Override
     public void display() {
-
+        //todo
     }
 
     @Override
     public int size() {
+        //todo
         return 0;
     }
 
     @Override
     public boolean isEmpty() {
+        //todo
         return false;
     }
 
@@ -40,6 +45,7 @@ public class OwnLinkedList  implements List, Displayeble {
 
     @Override
     public boolean add(Object o) {
+        //todo add
         return false;
     }
 
@@ -64,7 +70,7 @@ public class OwnLinkedList  implements List, Displayeble {
     }
 
     @Override
-    public Object get(int index) {
+    public E get(int index) {
         return null;
     }
 
@@ -79,7 +85,7 @@ public class OwnLinkedList  implements List, Displayeble {
     }
 
     @Override
-    public Object remove(int index) {
+    public E remove(int index) {
         return null;
     }
 
