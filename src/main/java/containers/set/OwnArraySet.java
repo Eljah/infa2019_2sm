@@ -15,7 +15,7 @@ public class OwnArraySet implements Set, Displayeble {
     }
 
     public int size() {
-        return capacity;
+        return capacity+1;
     }
 
     public boolean isEmpty() {
@@ -76,8 +76,9 @@ public class OwnArraySet implements Set, Displayeble {
     }
 
     public void display() {
-        for (int i = 0; i < capacity; i++) {
+        for (int i = 0; i <= capacity; i++) {
             System.out.print(array[i] + " ");
         }
+        System.out.println();
     }
 }

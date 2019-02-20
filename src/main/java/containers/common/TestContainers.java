@@ -2,6 +2,7 @@ package containers.common;
 
 import containers.array.ArrayContainer;
 import containers.linked.LinksContainer;
+import containers.set.OwnArraySet;
 
 import java.util.*;
 
@@ -22,6 +23,33 @@ public class TestContainers {
         linkContainer.insert(201);
         linkContainer.insert(202);
         print(linkContainer);
+
+        Set studentsOwnArraySet=new OwnArraySet(100);
+        ((OwnArraySet) studentsOwnArraySet).display();
+        System.out.println(studentsOwnArraySet.isEmpty());
+        System.out.println(studentsOwnArraySet.size());
+
+        Student student1=new Student();
+        student1.setName("AAA");
+        Student student2=new Student();
+        student2.setName("BBB");
+        Student student3=new Student();
+        student3.setName("AAA");
+
+        System.out.println("INSERTED:"+studentsOwnArraySet.add(student1));
+        ((OwnArraySet) studentsOwnArraySet).display();
+        System.out.println("Is empty: "+studentsOwnArraySet.isEmpty());
+        System.out.println(studentsOwnArraySet.size());
+
+        System.out.println("INSERTED:"+studentsOwnArraySet.add(student2));
+        ((OwnArraySet) studentsOwnArraySet).display();
+        System.out.println("Is empty: "+studentsOwnArraySet.isEmpty());
+        System.out.println(studentsOwnArraySet.size());
+
+        System.out.println("INSERTED:"+studentsOwnArraySet.add(student3));
+        ((OwnArraySet) studentsOwnArraySet).display();
+        System.out.println("Is empty: "+studentsOwnArraySet.isEmpty());
+        System.out.println(studentsOwnArraySet.size());
 
         List<Object> students=new ArrayList<Object>();
         students.add(new Student());
