@@ -9,17 +9,17 @@ public class OwnArraySet implements Set, Displayeble {
     private int capacity;
     private Object[] array;
 
-    public OwnArraySet(int max){
+    public OwnArraySet(int max) {
         this.array = new Object[max];
         this.capacity = -1;
     }
 
     public int size() {
-        return 0;
+        return capacity;
     }
 
     public boolean isEmpty() {
-        if(capacity>-1){
+        if (capacity > -1) {
             return false;
         }
         return true;
@@ -38,15 +38,13 @@ public class OwnArraySet implements Set, Displayeble {
     }
 
     public boolean add(Object value) {
-       int k=0;
-        for(int i=0;i<capacity;i++){
-           if(this.array[i]==value){
-               return false;
-           }
-
-       }
-       this.array[++this.capacity] = value;
-       return  true;
+        for (int i = 0; i < capacity; i++) {
+            if (this.array[i].equals(value)) {
+                return false;
+            }
+        }
+        this.array[++this.capacity] = value;
+        return true;
     }
 
     public boolean remove(Object o) {
@@ -78,8 +76,8 @@ public class OwnArraySet implements Set, Displayeble {
     }
 
     public void display() {
-        for (int i = 0; i <capacity ; i++) {
-            System.out.print(array[i]+" ");
+        for (int i = 0; i < capacity; i++) {
+            System.out.print(array[i] + " ");
         }
     }
 }
