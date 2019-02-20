@@ -30,7 +30,9 @@ public class OwnArraySet implements Set, Displayeble {
     }
 
     public Iterator iterator() {
-        return null;
+        throw new RuntimeException("Not implemented");
+        //todo implement
+        //return null;
     }
 
     public Object[] toArray() {

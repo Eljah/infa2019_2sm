@@ -35,6 +35,7 @@ public class TestContainers {
         student2.setName("BBB");
         Student student3=new Student();
         student3.setName("AAA");
+        Object object1 = new Object();
 
         System.out.println("INSERTED:"+studentsOwnArraySet.add(student1));
         ((OwnArraySet) studentsOwnArraySet).display();
@@ -51,12 +52,21 @@ public class TestContainers {
         System.out.println("Is empty: "+studentsOwnArraySet.isEmpty());
         System.out.println(studentsOwnArraySet.size());
 
+        System.out.println("INSERTED:"+studentsOwnArraySet.add(object1));
+        ((OwnArraySet) studentsOwnArraySet).display();
+        System.out.println("Is empty: "+studentsOwnArraySet.isEmpty());
+        System.out.println(studentsOwnArraySet.size());
+
+
         List<Object> students=new ArrayList<Object>();
         students.add(new Student());
         students.add(new Object());
+        Object fromArrayList0=students.get(0);
+        Object fromArrayList1=students.get(0);
 
         List<Student> students2=new ArrayList<Student>();
         students2.add(new Student());
+        Student fromArrayList2=students2.get(0);
         //students2.add(new Object());  <!-- will not work because of generic on Student
         }
 
