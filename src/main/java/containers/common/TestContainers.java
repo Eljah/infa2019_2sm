@@ -38,6 +38,7 @@ public class TestContainers {
         student3.setName("AAA");
         Object object1 = new Object();
 
+
         List<Student> studentList = new OwnLinkedList<>(student1);
         ((OwnLinkedList<Student>) studentList).display();
         System.out.println("Is empty: " + studentList.isEmpty());
@@ -76,19 +77,45 @@ public class TestContainers {
         System.out.println(studentsOwnArraySet.size());
 
 
-        //List<Object> students=new ArrayList<Object>();
+        for (Object student: studentsOwnArraySet)
+        {
+            System.out.println("FROM FOR ITERATOR "+(student).toString());
+        }
+        for (Object student: studentsOwnArraySet)
+        {
+            System.out.println("FROM FOR2 ITERATOR "+(student).toString());
+        }
+//        while (studentsOwnArraySet.iterator().hasNext())
+//        {
+//            System.out.println("FROM WHILE ITERATOR "+studentsOwnArraySet.iterator().next());
+//        }
+        Iterator iteratorStudentsOwnArraySet=studentsOwnArraySet.iterator();
+        while (iteratorStudentsOwnArraySet.hasNext())
+        {
+            System.out.println("FROM WHILE ITERATOR "+iteratorStudentsOwnArraySet.next());
+        }
+
+
+            //List<Object> students=new ArrayList<Object>();
         List<Object> students=new LinkedList<Object>();
         students.add(new Student());
         students.add(new Object());
         Object fromArrayList0=students.get(0);
         Object fromArrayList1=students.get(0);
 
-        //List<Student> students2=new ArrayList<Student>();
-        List<Student> students2=new LinkedList<Student>();
+        List<Student> students2=new ArrayList<Student>();
+        //List<Student> students2=new LinkedList<Student>();
         students2.add(new Student());
         Student fromArrayList2=students2.get(0);
         //students2.add(new Object());  <!-- will not work because of generic on Student
+
+        Iterator iteratorStudents2=students2.iterator();
+        while (iteratorStudents2.hasNext())
+        {
+            System.out.println("ITERATOR FROM ARRAY LIST "+iteratorStudents2.next());
         }
+
+    }
 
     static void print(Container arrayContainer)
     {

@@ -31,14 +31,20 @@ public class OwnArraySet implements Set, Displayeble {
 
     public Iterator iterator() {
         return new Iterator() {
+            int index=0;
+
             @Override
             public boolean hasNext() {
-                return false;
+                if (index<=capacity)
+                {
+                    return true;
+                }
+                else return false;
             }
 
             @Override
             public Object next() {
-                return null;
+                return array[index++];
             }
         };
     }
