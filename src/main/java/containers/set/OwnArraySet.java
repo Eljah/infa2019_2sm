@@ -15,7 +15,7 @@ public class OwnArraySet implements Set, Displayeble {
     }
 
     public int size() {
-        return capacity+1;
+        return capacity + 1;
     }
 
     public boolean isEmpty() {
@@ -30,9 +30,17 @@ public class OwnArraySet implements Set, Displayeble {
     }
 
     public Iterator iterator() {
-        throw new RuntimeException("Not implemented");
-        //todo implement
-        //return null;
+        return new Iterator() {
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public Object next() {
+                return null;
+            }
+        };
     }
 
     public Object[] toArray() {
