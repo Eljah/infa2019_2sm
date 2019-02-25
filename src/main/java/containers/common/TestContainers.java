@@ -51,10 +51,14 @@ public class TestContainers {
         ((OwnLinkedList<Student>) studentList).display();
         System.out.println("Is empty: " + studentList.isEmpty());
         System.out.println("Size: " + studentList.size());
-        /*studentList.add(object1);
-        ((OwnLinkedList<Student>) studentList).display();
-        System.out.println("Is empty: " + studentList.isEmpty());
-        System.out.println("Size: " + studentList.size());*/
+        System.out.println();
+        System.out.println("LINKEDLIST ITERATOR START: ");
+
+        for (Student e : studentList) {
+            System.out.println(e);
+        }
+
+        System.out.println("LINKEDLIST ITERATOR END \n");
 
         System.out.println("INSERTED:"+studentsOwnArraySet.add(student1));
         ((OwnArraySet) studentsOwnArraySet).display();
