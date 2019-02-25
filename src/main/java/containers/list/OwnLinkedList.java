@@ -53,8 +53,18 @@ public class OwnLinkedList<E>  implements List<E>, Displayeble {
     }
 
     @Override
-    public Iterator iterator() {
-        return null;
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            @Override
+            public boolean hasNext() {
+                return false;
+            }
+
+            @Override
+            public E next() {
+                return null;//firstLink.getValue();
+            }
+        };
     }
 
     @Override

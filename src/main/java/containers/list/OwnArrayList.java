@@ -7,7 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class OwnArrayList implements List, Displayeble {
+public class OwnArrayList<E> implements List<E>, Displayeble {
+    private int capacity;
+    private Object[] array;
+
     @Override
     public void display() {
 
@@ -29,8 +32,24 @@ public class OwnArrayList implements List, Displayeble {
     }
 
     @Override
-    public Iterator iterator() {
-        return null;
+    public Iterator<E> iterator() {
+        return new Iterator<E>() {
+            int index=0;
+
+            @Override
+            public boolean hasNext() {
+                if (index<=capacity)
+                {
+                    return true;
+                }
+                else return false;
+            }
+
+            @Override
+            public E next() {
+                return (E)array[index++];
+            }
+        };
     }
 
     @Override
@@ -39,7 +58,7 @@ public class OwnArrayList implements List, Displayeble {
     }
 
     @Override
-    public boolean add(Object o) {
+    public boolean add(E o) {
         return false;
     }
 
@@ -64,12 +83,12 @@ public class OwnArrayList implements List, Displayeble {
     }
 
     @Override
-    public Object get(int index) {
+    public E get(int index) {
         return null;
     }
 
     @Override
-    public Object set(int index, Object element) {
+    public E set(int index, Object element) {
         return null;
     }
 
@@ -79,7 +98,7 @@ public class OwnArrayList implements List, Displayeble {
     }
 
     @Override
-    public Object remove(int index) {
+    public E remove(int index) {
         return null;
     }
 
