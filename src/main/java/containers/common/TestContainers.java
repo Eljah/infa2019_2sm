@@ -114,6 +114,7 @@ public class TestContainers {
         students2.add(student2);
         students2.add(student1);
         students2.add(new Student());
+        students2.add(new Student());
         Student fromArrayList2=students2.get(0);
         //students2.add(new Object());  <!-- will not work because of generic on Student
 
@@ -147,18 +148,19 @@ public class TestContainers {
         studentsHashSet.addAll(students2);
         System.out.println("HashSet "+studentsHashSet.toString());
 
-        Set<Student> studentsTreeSet = new TreeSet<>(new Comparator<Student>() {
-            @Override
-            public int compare(Student o1, Student o2) {
-                if (o2.getName()==null&&o1.getName()==null)
-                {return 0;}
-                if (o1.getName()==null)
-                {return -1;}
-                if (o2.getName()==null)
-                {return 1;}
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
+//        Set<Student> studentsTreeSet = new TreeSet<>(new Comparator<Student>() {
+//            @Override
+//            public int compare(Student o1, Student o2) {
+//                if (o2.getName()==null&&o1.getName()==null)
+//                {return 0;}
+//                if (o1.getName()==null)
+//                {return -1;}
+//                if (o2.getName()==null)
+//                {return 1;}
+//                return o1.getName().compareTo(o2.getName());
+//            }
+//        });
+        Set<Student> studentsTreeSet = new TreeSet<>();
         studentsTreeSet.addAll(students2);
         System.out.println("TreeSet "+studentsTreeSet.toString());
 
@@ -166,6 +168,28 @@ public class TestContainers {
         studentsLinkedHashSet.addAll(students2);
         System.out.println("LinkedHashSet "+studentsLinkedHashSet.toString());
 
+        Map<String,Student> map=new HashMap<>();
+        Map<String,Student> map1=new TreeMap<>();
+        Map<String,Student> map2=new LinkedHashMap<>();
+
+        map.put("Student0",new Student());
+        map.put("Student1",student1);
+        map.put("Student2",student2);
+        map.put("Student3",student3);
+
+        map1.putAll(map);
+
+        map2.putAll(map);
+
+        System.out.println("HashMap "+map.toString());
+        System.out.println("TreeMap "+map1.toString());
+        System.out.println("LinkedHashMap "+map2.toString());
+
+        System.out.println(map.get("Student22")); //не существует такого ключа
+        for (String key: map.keySet())
+        {
+            System.out.println("From map"+map.get(key));
+        }
 
     }
 
