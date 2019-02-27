@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class OwnLinkedList<E>  implements List<E>, Displayeble {
+public class OwnLinkedList<E> implements List<E>, Displayeble {
 
     private NewLink<E> firstLink;
 
@@ -56,6 +56,7 @@ public class OwnLinkedList<E>  implements List<E>, Displayeble {
     public Iterator<E> iterator() {
         return new Iterator<E>() {
             NewLink<E> i = firstLink;
+
             @Override
             public boolean hasNext() {
                 return i.nextLink() != null;

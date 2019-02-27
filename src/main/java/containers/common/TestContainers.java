@@ -3,6 +3,7 @@ package containers.common;
 import containers.array.ArrayContainer;
 import containers.linked.LinksContainer;
 import containers.list.OwnLinkedList;
+import containers.list.ShuffleContainer;
 import containers.set.OwnArraySet;
 
 import java.util.*;
@@ -110,6 +111,9 @@ public class TestContainers {
         List<Student> students2=new ArrayList<Student>();
         //List<Student> students2=new LinkedList<Student>();
         students2.add(new Student());
+        students2.add(student1);
+        students2.add(student2);
+        students2.add(student3);
         Student fromArrayList2=students2.get(0);
         //students2.add(new Object());  <!-- will not work because of generic on Student
 
@@ -117,6 +121,17 @@ public class TestContainers {
         while (iteratorStudents2.hasNext())
         {
             System.out.println("ITERATOR FROM ARRAY LIST "+iteratorStudents2.next());
+        }
+
+        ShuffleContainer<Student> shuffleContainer=new ShuffleContainer<Student>(students2);
+        for(Student student: shuffleContainer)
+        {
+            System.out.println("FOREACH ORDERED FROM SHUFFLE CONTANER "+student);
+        }
+
+        for(Student student: shuffleContainer.shuffle())
+        {
+            System.out.println("FOREACH SHUFFLED FROM SHUFFLE CONTANER "+student);
         }
 
     }
