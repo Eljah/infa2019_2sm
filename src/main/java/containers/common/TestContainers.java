@@ -110,10 +110,10 @@ public class TestContainers {
 
         List<Student> students2=new ArrayList<Student>();
         //List<Student> students2=new LinkedList<Student>();
-        students2.add(new Student());
-        students2.add(student1);
-        students2.add(student2);
         students2.add(student3);
+        students2.add(student2);
+        students2.add(student1);
+        students2.add(new Student());
         Student fromArrayList2=students2.get(0);
         //students2.add(new Object());  <!-- will not work because of generic on Student
 
@@ -127,12 +127,45 @@ public class TestContainers {
         for(Student student: shuffleContainer)
         {
             System.out.println("FOREACH ORDERED FROM SHUFFLE CONTANER "+student);
+            System.out.println("HASHCODE "+student.hashCode());
         }
 
         for(Student student: shuffleContainer.shuffle())
         {
             System.out.println("FOREACH SHUFFLED FROM SHUFFLE CONTANER "+student);
         }
+
+        List<Student> studentsArrayList = new ArrayList<>();
+        studentsArrayList.addAll(students2);
+        System.out.println("ArrayList "+studentsArrayList.toString());
+
+        List<Student> studentsLinkedList = new LinkedList<>();
+        studentsLinkedList.addAll(students2);
+        System.out.println("LinkedList "+studentsLinkedList.toString());
+
+        Set<Student> studentsHashSet = new HashSet<>();
+        studentsHashSet.addAll(students2);
+        System.out.println("HashSet "+studentsHashSet.toString());
+
+        Set<Student> studentsTreeSet = new TreeSet<>(new Comparator<Student>() {
+            @Override
+            public int compare(Student o1, Student o2) {
+                if (o2.getName()==null&&o1.getName()==null)
+                {return 0;}
+                if (o1.getName()==null)
+                {return -1;}
+                if (o2.getName()==null)
+                {return 1;}
+                return o1.getName().compareTo(o2.getName());
+            }
+        });
+        studentsTreeSet.addAll(students2);
+        System.out.println("TreeSet "+studentsTreeSet.toString());
+
+        Set<Student> studentsLinkedHashSet = new LinkedHashSet<>();
+        studentsLinkedHashSet.addAll(students2);
+        System.out.println("LinkedHashSet "+studentsLinkedHashSet.toString());
+
 
     }
 

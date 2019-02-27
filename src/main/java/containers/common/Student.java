@@ -2,7 +2,7 @@ package containers.common;
 
 import java.util.Objects;
 
-public class Student {
+public class Student extends Object {
     public String name;
 
     @Override
