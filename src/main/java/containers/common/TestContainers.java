@@ -5,6 +5,7 @@ import containers.linked.LinksContainer;
 import containers.list.OwnLinkedList;
 import containers.list.ShuffleContainer;
 import containers.set.OwnArraySet;
+import containers.vararg.VarargExample;
 
 import java.util.*;
 
@@ -209,6 +210,10 @@ public class TestContainers {
         Student extractedStudent3=studentQueue.peek();
         System.out.println(extractedStudent3);
         System.out.println(studentQueue.toString());
+
+        VarargExample varargExample=new VarargExample();
+        varargExample.vararg(student1,student2,student3,new Student());
+        varargExample.vararg(student2,new Student(){});
 
     }
 
