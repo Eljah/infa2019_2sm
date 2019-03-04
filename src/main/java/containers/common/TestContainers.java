@@ -191,6 +191,25 @@ public class TestContainers {
             System.out.println("From map"+map.get(key));
         }
 
+        //Queue<Student> studentQueue=new LinkedList<>();
+        Queue<Student> studentQueue=new PriorityQueue<>();
+        System.out.println(studentQueue.toString());
+        studentQueue.add(student1);
+        System.out.println(studentQueue.toString());
+        studentQueue.add(student2);
+        System.out.println(studentQueue.toString());
+        studentQueue.add(new Student());
+        System.out.println(studentQueue.toString());
+        Student extractedStudent1=studentQueue.poll();
+        System.out.println(extractedStudent1);
+        System.out.println(studentQueue.toString());
+        Student extractedStudent2=studentQueue.poll();
+        System.out.println(extractedStudent2);
+        System.out.println(studentQueue.toString());
+        Student extractedStudent3=studentQueue.peek();
+        System.out.println(extractedStudent3);
+        System.out.println(studentQueue.toString());
+
     }
 
     static void print(Container arrayContainer)
