@@ -2,7 +2,8 @@ package containers.common;
 
 import java.util.Objects;
 
-public class Student implements Comparable {
+public class Student implements Comparable
+{
     public String name;
 
     @Override
