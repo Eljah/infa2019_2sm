@@ -116,6 +116,14 @@ public class StreamsTest2 {
                 }).
                 reduce((x, y) -> x + x)));
 
+        System.out.println((Stream.generate(() -> 1d).limit(100).reduce(0d,(x, y) -> y + x)));
+        System.out.println((Stream.generate(() -> 1d).limit(100).reduce(1d,(x, y) -> y + x)));
+        System.out.println((Stream.generate(() -> 10d).limit(100).reduce(1d,(x, y) -> y * x)));
+        System.out.println((Stream.generate(() -> 10d).limit(100).reduce(0d,(x, y) -> y * x)));
+
+        System.out.println("1.0".length());
+
+        System.out.println((Stream.generate(() -> 1d).limit(100).map(i -> i.toString()).reduce(0,(total, word)-> total+ word.length(),(total1,total2)->total1+total2)));
 
     }
 }
