@@ -156,13 +156,54 @@ public class StreamsTest3 {
                 }));
         System.out.println(stringStudentInGroupMap15);
 
-        studentInGroupList.add(Optional.of(new StudentInGroup("Petrov", "11-305", 18, true)));
+        studentInGroupList.add(Optional.of(new StudentInGroup("Petrov", "11-305", 18, false)));
+        studentInGroupList.add(Optional.of(new StudentInGroup("Petrov", "11-305", 18, false)));
 
-        Map<String, List<String>> stringStudentInGroupMap16 = studentInGroupStreamSupplier.<StudentInGroup>get().map(StudentInGroup::getName).filter(s->s!=null).collect(Collectors.groupingBy(s->s.substring(0,3)));
+        Map<String, List<String>> stringStudentInGroupMap16 = studentInGroupStreamSupplier.<StudentInGroup>get()
+                //.peek(System.out::println)
+                .map(StudentInGroup::getName).filter(s->s!=null).collect(Collectors.groupingBy(s->s.substring(0,3)));
         System.out.println(stringStudentInGroupMap16);
 
-        Map<String, Set<String>> stringStudentInGroupMap17 = studentInGroupStreamSupplier.<StudentInGroup>get().map(StudentInGroup::getName).filter(s->s!=null).collect(Collectors.groupingBy(s->s.substring(0,3),Collectors.toSet()));
+        Map<String, Set<String>> stringStudentInGroupMap17 = studentInGroupStreamSupplier.<StudentInGroup>get()
+                //.peek(System.out::println)
+                .map(StudentInGroup::getName).filter(s->s!=null).collect(Collectors.groupingBy(s->s.substring(0,3),Collectors.toSet()));
         System.out.println(stringStudentInGroupMap17);
+
+        Map<Integer, List<StudentInGroup>> stringStudentInGroupMap18 = studentInGroupStreamSupplier.<StudentInGroup>get().filter(studentInGroup -> studentInGroup.getGroupNumber().isPresent()).collect(Collectors.groupingBy(StudentInGroup::getAge));
+        System.out.println(stringStudentInGroupMap18);
+
+        Map<Integer,Long> stringStudentInGroupMap19 = studentInGroupStreamSupplier.<StudentInGroup>get().filter(studentInGroup -> studentInGroup.getGroupNumber().isPresent()).collect(Collectors.groupingBy(StudentInGroup::getAge,Collectors.counting()));
+        System.out.println(stringStudentInGroupMap19);
+
+        Map<String,Long> stringStudentInGroupMap20 = studentInGroupStreamSupplier.<StudentInGroup>get().peek(System.out::println).filter(studentInGroup -> studentInGroup.getGroupNumber().isPresent()).collect(Collectors.groupingBy(StudentInGroup::getName,Collectors.counting()));
+        System.out.println(stringStudentInGroupMap20);
+
+        Map<String,Long> stringStudentInGroupMap21 = studentInGroupStreamSupplier.<StudentInGroup>get().filter(studentInGroup -> studentInGroup.getGroupNumber().isPresent()).collect(Collectors.groupingBy(student->student.getGroupNumber().get(),Collectors.counting()));
+        System.out.println(stringStudentInGroupMap21);
+
+        Map<String,List<String>> stringStudentInGroupMap22 = studentInGroupStreamSupplier.<StudentInGroup>get().filter(studentInGroup -> studentInGroup.getGroupNumber().isPresent()).collect(Collectors.groupingBy(student->student.getGroupNumber().get(),Collectors.mapping(StudentInGroup::getName,Collectors.toList())));
+        System.out.println(stringStudentInGroupMap22);
+
+        Map<String,List<String>> stringStudentInGroupMap23 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.mapping(StudentInGroup::getName,Collectors.toList())));
+        System.out.println(stringStudentInGroupMap23);
+
+        Map<String,Set<String>> stringStudentInGroupMap24 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.mapping(StudentInGroup::getName,Collectors.toSet())));
+        System.out.println(stringStudentInGroupMap24);
+
+        Map<String,Set<Integer>> stringStudentInGroupMap25 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.mapping(StudentInGroup::getAge,Collectors.toSet())));
+        System.out.println(stringStudentInGroupMap25);
+
+        Map<Integer,Set<String>> stringStudentInGroupMap26 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getAge,Collectors.mapping(student->student.getGroupNumber().orElse("none"),Collectors.toSet())));
+        System.out.println(stringStudentInGroupMap26);
+
+        Map<Integer,Map<String,Set<String>>> stringStudentInGroupMap27 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getAge,Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.mapping(StudentInGroup::getName,Collectors.toSet()))));
+        System.out.println(stringStudentInGroupMap27);
+
+        Map<String,Map<Integer,Set<String>>> stringStudentInGroupMap28 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.groupingBy(StudentInGroup::getAge,Collectors.mapping(StudentInGroup::getName,Collectors.toSet()))));
+        System.out.println(stringStudentInGroupMap28);
+
+        Map<Integer,Map<String,Long>> stringStudentInGroupMap29 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getAge,Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.mapping(StudentInGroup::getName,Collectors.counting()))));
+        System.out.println(stringStudentInGroupMap29);
 
 
     }
