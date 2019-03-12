@@ -4,7 +4,12 @@ import containers.common.Student;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Created by eljah32 on 3/12/2019.
@@ -13,7 +18,7 @@ public class StreamsTest3 {
     public static void main(String[] args) {
 
         Optional<StudentInGroup> petrov=Optional.of(new StudentInGroup("Petrov",null,18,false));
-        Optional<StudentInGroup> petrova=Optional.of(new StudentInGroup("Petrov","11-305",18,true));
+        Optional<StudentInGroup> petrova=Optional.of(new StudentInGroup("Petrova","11-305",18,true));
 
         List<Optional<StudentInGroup>> studentInGroupList=new ArrayList<>();
         studentInGroupList.add(Optional.of(new StudentInGroup("Ivanov","11-307",18,false)));
@@ -55,6 +60,10 @@ public class StreamsTest3 {
         }
 
 
+        Supplier<Stream<StudentInGroup>> studentInGroupStreamSupplier = ()-> studentInGroupList.stream().map((o)->o.orElse(new StudentInGroup(null,null,-1,false)));
+
+        Map<String,StudentInGroup> stringStudentInGroupMap=studentInGroupStreamSupplier.get().collect(Collectors.toMap(StudentInGroup::getName, Function.identity()));
+        System.out.println(stringStudentInGroupMap);
 
 
     }
