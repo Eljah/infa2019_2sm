@@ -12,6 +12,16 @@ public class StudentInGroup {
     private boolean isGirl;
     private int age;
 
+    @Override
+    public String toString() {
+        return "StudentInGroup{" +
+                "groupNumber=" + groupNumber +
+                ", name='" + name + '\'' +
+                ", isGirl=" + isGirl +
+                ", age=" + age +
+                '}';
+    }
+
     public StudentInGroup(String name, String groupNumber, int age, boolean isGirl)
     {
         this.name=name;
