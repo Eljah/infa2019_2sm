@@ -205,6 +205,21 @@ public class StreamsTest3 {
         Map<Integer,Map<String,Long>> stringStudentInGroupMap29 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getAge,Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.mapping(StudentInGroup::getName,Collectors.counting()))));
         System.out.println(stringStudentInGroupMap29);
 
+        Map<Integer,String> stringStudentInGroupMap30 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getAge,Collectors.mapping(StudentInGroup::getName,Collectors.joining(", ", "{","}"))));
+        System.out.println(stringStudentInGroupMap30);
+
+//        Map<Integer,String> stringStudentInGroupMap31 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getAge,Collectors.joining(", ")));
+//        System.out.println(stringStudentInGroupMap31);
+
+        Map<String, Double> stringStudentInGroupMap32 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.averagingDouble(StudentInGroup::getAge)));
+        System.out.println(stringStudentInGroupMap32);
+
+        Map<String, Double> stringStudentInGroupMap33 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.averagingInt(StudentInGroup::getAge)));
+        System.out.println(stringStudentInGroupMap33);
+
+        Map<String, IntSummaryStatistics> stringStudentInGroupMap34 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.summarizingInt(StudentInGroup::getAge)));
+        System.out.println(stringStudentInGroupMap34);
+
 
     }
 }
