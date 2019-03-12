@@ -20,6 +20,8 @@ public class StreamsTest3 {
         studentInGroupList.add(Optional.of(new StudentInGroup("Ishikawa","11-305",18,false)));
         studentInGroupList.add(Optional.of(new StudentInGroup("Nguyen","11-305",18,false)));
         studentInGroupList.add(Optional.of(new StudentInGroup("Chui","11-305",18,true)));
+        studentInGroupList.add(Optional.of(new StudentInGroup("Petrov",null,18,true)));
+
 
 
 

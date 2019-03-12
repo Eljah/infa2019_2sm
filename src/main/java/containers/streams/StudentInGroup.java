@@ -1,11 +1,13 @@
 package containers.streams;
 
+import java.util.Optional;
+
 /**
  * Created by eljah32 on 3/12/2019.
  */
 public class StudentInGroup {
 
-    private String groupNumber;
+    private Optional<String> groupNumber;
     private String name;
     private boolean isGirl;
     private int age;
@@ -13,16 +15,16 @@ public class StudentInGroup {
     public StudentInGroup(String name, String groupNumber, int age, boolean isGirl)
     {
         this.name=name;
-        this.groupNumber=groupNumber;
+        this.groupNumber=Optional.ofNullable(groupNumber);
         this.age=age;
         this.isGirl=isGirl;
     }
 
-    public String getGroupNumber() {
+    public Optional<String> getGroupNumber() {
         return groupNumber;
     }
 
-    public void setGroupNumber(String groupNumber) {
+    public void setGroupNumber(Optional<String> groupNumber) {
         this.groupNumber = groupNumber;
     }
 
