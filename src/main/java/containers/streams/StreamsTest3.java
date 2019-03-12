@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -219,6 +220,22 @@ public class StreamsTest3 {
 
         Map<String, IntSummaryStatistics> stringStudentInGroupMap34 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none"),Collectors.summarizingInt(StudentInGroup::getAge)));
         System.out.println(stringStudentInGroupMap34);
+
+        IntStream intStream=studentInGroupStreamSupplier.<StudentInGroup>get().mapToInt(StudentInGroup::getAge);
+        Stream<Integer> integerStream=intStream.boxed();
+
+        intStream=studentInGroupStreamSupplier.<StudentInGroup>get().mapToInt(StudentInGroup::getAge);
+        IntSummaryStatistics intSummaryStatistics=intStream.summaryStatistics();
+
+        IntSummaryStatistics intSummaryStatistics1=integerStream.collect(Collectors.summarizingInt(Integer::intValue));
+
+        intStream=studentInGroupStreamSupplier.<StudentInGroup>get().mapToInt(StudentInGroup::getAge);
+        integerStream=intStream.boxed();
+        DoubleSummaryStatistics doubleSummaryStatistics1=integerStream.collect(Collectors.summarizingDouble(Integer::doubleValue));
+
+        System.out.println(intSummaryStatistics);
+        System.out.println(intSummaryStatistics1);
+        System.out.println(doubleSummaryStatistics1);
 
 
     }
