@@ -95,32 +95,74 @@ public class StreamsTest3 {
 //                }));
 //        System.out.println(stringStudentInGroupMap6);
 
-        Map<Integer, Set<StudentInGroup>> stringStudentInGroupMap5 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.toMap(StudentInGroup::getAge, x -> {System.out.println("x: "+x); return new HashSet<>();},
+        Map<Integer, Set<StudentInGroup>> stringStudentInGroupMap5 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.toMap(StudentInGroup::getAge, x -> {
+                    System.out.println("x: " + x);
+                    return new HashSet<>();
+                },
                 (x, y) -> {
-                    System.out.println("x: "+x+", y: "+y);
+                    System.out.println("x: " + x + ", y: " + y);
                     x.addAll(y);
                     return x;
                 }
-                ,HashMap::new));
+                , HashMap::new));
         System.out.println(stringStudentInGroupMap5);
 
-        Map<Integer, Set<StudentInGroup>> stringStudentInGroupMap7 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.toMap(StudentInGroup::getAge, x -> {System.out.println("x: "+x); return new HashSet<>(Arrays.asList(x));},
+        Map<Integer, Set<StudentInGroup>> stringStudentInGroupMap7 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.toMap(StudentInGroup::getAge, x -> {
+                    System.out.println("x: " + x);
+                    return new HashSet<>(Arrays.asList(x));
+                },
                 (x, y) -> {
-                    System.out.println("x: "+x+", y: "+y);
+                    System.out.println("x: " + x + ", y: " + y);
                     x.addAll(y);
                     return x;
                 }
-                ,HashMap::new));
+                , LinkedHashMap::new));
         System.out.println(stringStudentInGroupMap7);
 
-        Map<Integer, Set<StudentInGroup>> stringStudentInGroupMap8 = studentInGroupStreamSupplier.<StudentInGroup>get().parallel().collect(Collectors.toMap(StudentInGroup::getAge, x -> {System.out.println("x: "+x); return new HashSet<>();},
+        Map<Integer, Set<StudentInGroup>> stringStudentInGroupMap8 = studentInGroupStreamSupplier.<StudentInGroup>get().parallel().collect(Collectors.toMap(StudentInGroup::getAge, x -> {
+                    System.out.println("x: " + x);
+                    return new HashSet<>();
+                },
                 (x, y) -> {
-                    System.out.println("x: "+x+", y: "+y);
+                    System.out.println("x: " + x + ", y: " + y);
                     x.addAll(y);
                     return x;
                 }
-                ,HashMap::new));
+                , TreeMap::new));
         System.out.println(stringStudentInGroupMap8);
+
+        Map<Integer, List<StudentInGroup>> stringStudentInGroupMap9 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getAge));
+        System.out.println(stringStudentInGroupMap9);
+
+        Map<Optional<String>, List<StudentInGroup>> stringStudentInGroupMap11 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getGroupNumber));
+        System.out.println(stringStudentInGroupMap11);
+
+//        Map<String, List<StudentInGroup>> stringStudentInGroupMap10 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(StudentInGroup::getName));
+//        System.out.println(stringStudentInGroupMap10);
+
+        Map<String, List<StudentInGroup>> stringStudentInGroupMap12 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().orElse("none")));
+        System.out.println(stringStudentInGroupMap12);
+
+//        Map<String, List<StudentInGroup>> stringStudentInGroupMap13 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.groupingBy(student->student.getGroupNumber().get()));
+//        System.out.println(stringStudentInGroupMap13);
+
+        Map<String, List<StudentInGroup>> stringStudentInGroupMap14 = studentInGroupStreamSupplier.<StudentInGroup>get().filter(studentInGroup -> studentInGroup.getGroupNumber().isPresent()).collect(Collectors.groupingBy(student->student.getGroupNumber().get()));
+        System.out.println(stringStudentInGroupMap14);
+
+        Map<Integer, List<String>> stringStudentInGroupMap15 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.toMap(StudentInGroup::getAge,x -> {List toReturn=new ArrayList<String>();toReturn.add(x.getName());return toReturn;},
+                (x, y) -> {
+                    x.addAll(y);
+                    return x;
+                }));
+        System.out.println(stringStudentInGroupMap15);
+
+        studentInGroupList.add(Optional.of(new StudentInGroup("Petrov", "11-305", 18, true)));
+
+        Map<String, List<String>> stringStudentInGroupMap16 = studentInGroupStreamSupplier.<StudentInGroup>get().map(StudentInGroup::getName).filter(s->s!=null).collect(Collectors.groupingBy(s->s.substring(0,3)));
+        System.out.println(stringStudentInGroupMap16);
+
+        Map<String, Set<String>> stringStudentInGroupMap17 = studentInGroupStreamSupplier.<StudentInGroup>get().map(StudentInGroup::getName).filter(s->s!=null).collect(Collectors.groupingBy(s->s.substring(0,3),Collectors.toSet()));
+        System.out.println(stringStudentInGroupMap17);
 
 
     }
