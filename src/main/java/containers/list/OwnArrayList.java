@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class OwnArrayList<E> implements List<E>, Displayeble {
+
     private int capacity;
     private Object[] array;
 

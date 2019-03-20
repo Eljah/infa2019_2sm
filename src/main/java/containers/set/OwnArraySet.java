@@ -6,6 +6,10 @@ import java.util.Set;
 
 public class OwnArraySet implements Set, Displayeble {
     //todo internal structure
+    static {
+        System.out.println("OwnArraySet loaded");
+    }
+
     private int capacity;
     private Object[] array;
 

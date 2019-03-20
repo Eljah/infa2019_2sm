@@ -6,6 +6,9 @@ import java.util.Optional;
  * Created by eljah32 on 3/12/2019.
  */
 public class StudentInGroup {
+    static {
+        System.out.println("StudentInGroup loaded");
+    }
 
     private Optional<String> groupNumber;
     private String name;
