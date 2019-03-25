@@ -1,5 +1,7 @@
 package reflection;
 
+import containers.list.OwnArrayList;
+import containers.list.ShuffleContainer;
 import containers.map.Student;
 import containers.set.Displayeble;
 import containers.set.OwnArraySet;
@@ -47,7 +49,12 @@ public class GenericExampleTest {
         GenericExample<Student> studentGenericExample = new GenericExample<>(new Student("aa", "bb"));
 
 
-        Class classOfParameter = Displayeble.class;
+        Class classOfParameter = OwnLinkedSet.class;
+        //Class classOfParameter = Displayeble.class;
+        //Class<Displayeble> classOfParameter = Displayeble.class;
+        //Class<? extends Displayeble> classOfParameter = OwnLinkedSet.class;
+        //Class<? extends Displayeble> classOfParameter2 = ShuffleContainer.class;
+
         System.out.println(classOfParameter.getSimpleName());
         System.out.println(classOfParameter.getCanonicalName());
         System.out.println(classOfParameter.toString());
@@ -66,7 +73,7 @@ public class GenericExampleTest {
             e.printStackTrace();
         }
 
-        Displayeble wronglyInstantiated;
+        Displayeble wronglyInstantiated=null;
         try {
             //wronglyInstantiated=(Displayeble) displayebleClass.newInstance();
             Constructor constructor=displayebleClass.getConstructor(int.class);
@@ -80,7 +87,8 @@ public class GenericExampleTest {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        Displayeble okInstantiated=new OwnArraySet(100);
+        //Displayeble okInstantiated=new OwnArraySet(100);
+        Displayeble okInstantiated=wronglyInstantiated;
 
         try {
             Method displayebleMethod=displayebleClass.getMethod("size");
@@ -88,6 +96,12 @@ public class GenericExampleTest {
             int value=(int)displayebleMethod.invoke(okInstantiated,null);
             System.out.println("Value returned: "+value);
             System.out.println("After the invoke size call");
+//            Method displayebleMethod1=classOfParameter.getMethod("size");
+//            System.out.println("Before the invoke size call (1)");
+//            int value1=(int)displayebleMethod1.invoke(okInstantiated,null);
+//            System.out.println("Value returned: "+value1);
+//            System.out.println("After the invoke size call (1)");
+
             //Method displayebleMethod2=displayebleClass.getMethod("add");
             Method displayebleMethod2=displayebleClass.getMethod("add",Object.class);
             System.out.println("Before the invoke add call");
