@@ -14,7 +14,16 @@ public class GenericExampleTest {
     public static void main(String[] args) {
         String field="aaa";
 
+        //загрузка
+        //компоновка
+        //инициализация
+
         Displayeble displayeble=new OwnLinkedSet();
+        OwnLinkedSet.justBe();
+        //OwnArraySet.justBe(); //initialized on static method call
+        //OwnArraySet.b=200; //initialized on static variable call
+        //System.out.println(OwnArraySet.C); //not initialzed on final stativ variable call
+        System.out.println(OwnArraySet.b); //initialized on static variable call
         Class displayebleClass=OwnArraySet.class;
         System.out.println(displayebleClass.isInstance(displayeble));
 

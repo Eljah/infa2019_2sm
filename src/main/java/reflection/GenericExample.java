@@ -9,6 +9,7 @@ public class GenericExample<T> {
 
     public GenericExample(T parameter)
     {
+        //T a=new T();
         this.someField=parameter;
         Class classOfParameter=someField.getClass();
         System.out.println(classOfParameter.getSimpleName());
@@ -26,6 +27,7 @@ public class GenericExample<T> {
         System.out.println(Collections.unmodifiableList(Arrays.asList(classOfParameter.getMethods())));
         System.out.println(Collections.unmodifiableList(Arrays.asList(classOfParameter.getFields())));
         System.out.println(Collections.unmodifiableList(Arrays.asList(classOfParameter.getDeclaredFields())));
+
 
     }
 }

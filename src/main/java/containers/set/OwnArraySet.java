@@ -6,8 +6,15 @@ import java.util.Set;
 
 public class OwnArraySet implements Set, Displayeble {
     //todo internal structure
+    static public int b=200;
+    static public final int C=600;
+
     static {
         System.out.println("OwnArraySet loaded");
+    }
+
+    public static void justBe()
+    {
     }
 
     private int capacity;

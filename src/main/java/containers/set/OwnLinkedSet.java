@@ -6,6 +6,13 @@ import java.util.Set;
 
 public class OwnLinkedSet implements Set, Displayeble {
     //todo internal structure
+    public static void justBe()
+    {
+    }
+
+//    static {
+//        System.out.println("OwnLinkedSet loaded");
+//    }
 
     public int size() {
         return 0;
