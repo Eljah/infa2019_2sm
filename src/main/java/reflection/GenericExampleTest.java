@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Set;
 
 public class GenericExampleTest {
 
@@ -26,10 +27,10 @@ public class GenericExampleTest {
 
         Displayeble displayeble = new OwnLinkedSet();
         OwnLinkedSet.justBe();
-        //OwnArraySet.justBe(); //initialized on static method call
+        OwnArraySet.justBe(); //initialized on static method call
         //OwnArraySet.b=200; //initialized on static variable call
         //System.out.println(OwnArraySet.C); //not initialzed on final stativ variable call
-        System.out.println(OwnArraySet.b); //initialized on static variable call
+        //System.out.println(OwnArraySet.b); //initialized on static variable call
         Class displayebleClass = OwnArraySet.class;
         System.out.println(displayebleClass.isInstance(displayeble));
 
@@ -41,6 +42,7 @@ public class GenericExampleTest {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
+        //stringClass.newInstance();
 
         GenericExample<String> stringGenericExample = new GenericExample<>("aaa");
         GenericExample<StudentInGroup> studentInGroupGenericExample = new GenericExample<>(new StudentInGroup("GroupStudent", "11-806", 18, false));
@@ -49,10 +51,11 @@ public class GenericExampleTest {
         GenericExample<Student> studentGenericExample = new GenericExample<>(new Student("aa", "bb"));
 
 
-        Class classOfParameter = OwnLinkedSet.class;
+        //Class classOfParameter = OwnLinkedSet.class;
         //Class classOfParameter = Displayeble.class;
+        //Class classOfParameter = Set.class;
         //Class<Displayeble> classOfParameter = Displayeble.class;
-        //Class<? extends Displayeble> classOfParameter = OwnLinkedSet.class;
+        Class<? extends Displayeble> classOfParameter = OwnLinkedSet.class;
         //Class<? extends Displayeble> classOfParameter2 = ShuffleContainer.class;
 
         System.out.println(classOfParameter.getSimpleName());

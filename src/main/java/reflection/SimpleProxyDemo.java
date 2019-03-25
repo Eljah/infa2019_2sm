@@ -3,13 +3,14 @@ package reflection;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.Set;
 
 public class SimpleProxyDemo
 {
     public static void process(Interface iface)
     {
         iface.doSomething();
-        iface.returnSomethingElse("argsHere");
+        System.out.println(iface.returnSomethingElse("argsHere"));
     }
 
     public static void main(String[] args) {
@@ -40,9 +41,9 @@ public class SimpleProxyDemo
             System.out.println("THIS IS AFTER CALL FROM DYNAMIC PROXY, CALLING METHOD "+method.getName());
             //if (toBeReturned instanceof String) {
             if (toBeReturned !=null) {
-                return "OLOLO I CAN INFLUENCE";
+                return "OLOLO I CAN INFLUENCE"+toBeReturned;
             }
-            else
+//            else
                 return toBeReturned;
         }
     }

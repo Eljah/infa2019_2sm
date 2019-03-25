@@ -10,9 +10,9 @@ public class OwnLinkedSet implements Set, Displayeble {
     {
     }
 
-//    static {
-//        System.out.println("OwnLinkedSet loaded");
-//    }
+    static {
+        System.out.println("OwnLinkedSet loaded");
+    }
 
     public int size() {
         return 0;
