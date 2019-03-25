@@ -69,6 +69,7 @@ public class OwnLinkedSet implements Set, Displayeble {
     }
 
     public void display() {
+        System.out.println("Here we call OwnLinkedSet display");
         //todo
     }
 }

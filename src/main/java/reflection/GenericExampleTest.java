@@ -6,6 +6,8 @@ import containers.set.OwnArraySet;
 import containers.set.OwnLinkedSet;
 import containers.streams.StudentInGroup;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
@@ -49,6 +51,62 @@ public class GenericExampleTest {
         System.out.println(classOfParameter.getCanonicalName());
         System.out.println(classOfParameter.toString());
         System.out.println(classOfParameter.getTypeName());
+
+        try {
+            Method displayebleMethod=classOfParameter.getMethod("display");
+            System.out.println("Before the invoke call");
+            displayebleMethod.invoke(displayeble,null);
+            System.out.println("After the invoke call");
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+        Displayeble wronglyInstantiated;
+        try {
+            //wronglyInstantiated=(Displayeble) displayebleClass.newInstance();
+            Constructor constructor=displayebleClass.getConstructor(int.class);
+            wronglyInstantiated= (Displayeble) constructor.newInstance(100);
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
+        Displayeble okInstantiated=new OwnArraySet(100);
+
+        try {
+            Method displayebleMethod=displayebleClass.getMethod("size");
+            System.out.println("Before the invoke size call");
+            int value=(int)displayebleMethod.invoke(okInstantiated,null);
+            System.out.println("Value returned: "+value);
+            System.out.println("After the invoke size call");
+            //Method displayebleMethod2=displayebleClass.getMethod("add");
+            Method displayebleMethod2=displayebleClass.getMethod("add",Object.class);
+            System.out.println("Before the invoke add call");
+            boolean added=(boolean)displayebleMethod2.invoke(okInstantiated,new Object());
+            System.out.println("Adding object to container result:"+added);
+            System.out.println("After the invoke add call");
+            System.out.println("Before the invoke size call (2)");
+            value=(int)displayebleMethod.invoke(okInstantiated,null);
+            System.out.println("Value returned: "+value);
+            System.out.println("After the invoke size call (2)");
+
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+   //     } catch (InstantiationException e) {
+    //        e.printStackTrace();
+       }
 
         //System.out.println(classOfParameter.getSuperclass().getName());
         System.out.println(Collections.unmodifiableList(Arrays.asList(classOfParameter.getInterfaces())));
