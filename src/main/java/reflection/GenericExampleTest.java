@@ -7,6 +7,7 @@ import containers.set.OwnLinkedSet;
 import containers.streams.StudentInGroup;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -97,6 +98,10 @@ public class GenericExampleTest {
             value=(int)displayebleMethod.invoke(okInstantiated,null);
             System.out.println("Value returned: "+value);
             System.out.println("After the invoke size call (2)");
+            //Field privateCapasity=displayebleClass.getDeclaredField("capacity");
+            Field privateCapasity=displayebleClass.getDeclaredField("capacity");
+            privateCapasity.setAccessible(true);
+            System.out.println("Capacity: "+privateCapasity.getInt(okInstantiated));
 
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -106,7 +111,9 @@ public class GenericExampleTest {
             e.printStackTrace();
    //     } catch (InstantiationException e) {
     //        e.printStackTrace();
-       }
+       } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+        }
 
         //System.out.println(classOfParameter.getSuperclass().getName());
         System.out.println(Collections.unmodifiableList(Arrays.asList(classOfParameter.getInterfaces())));
