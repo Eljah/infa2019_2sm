@@ -60,6 +60,8 @@ public class GenericExampleTest {
                 String method_name = method.getName();
                 Class<?>[] classes = method.getParameterTypes();
 
+                //System.out.println("What do we have in proxy object here? "+proxy);
+                System.out.println("What do we have in proxy object here? "+proxy.getClass());
                 if (method_name.equals("display")) {
                     if (args == null) {
                         System.out.println("Display called without args");
