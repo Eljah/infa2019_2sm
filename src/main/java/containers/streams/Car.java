@@ -1,10 +1,12 @@
 package containers.streams;
 
+import java.util.Optional;
+
 /**
  * Created by eljah32 on 3/26/2019.
  */
 public class Car<T> {
-    T studentInGroup;
+    Optional<T> studentInGroup;//=Optional.empty();
 
 //    public Car(StudentInGroup studentInGroup)
 //    {
@@ -23,11 +25,11 @@ public class Car<T> {
                 '}';
     }
 
-    public T getStudentInGroup() {
+    public Optional<T> getStudentInGroup() {
         return studentInGroup;
     }
 
     public void setStudentInGroup(T studentInGroup) {
-        this.studentInGroup = studentInGroup;
+        this.studentInGroup=Optional.of(studentInGroup);
     }
 }

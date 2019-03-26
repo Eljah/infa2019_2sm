@@ -261,7 +261,11 @@ public class StreamsTest3 {
         List<Car> cars=studentInGroupStreamSupplier.get().map((StudentInGroup studentInGroup)->{Car car=new Car();car.setStudentInGroup(studentInGroup);return car;}).collect(Collectors.toList());
         System.out.println(cars);
 
+        Map<Optional<StudentInGroup>, List<Car>> stringStudentInGroupMap37= studentInGroupStreamSupplier.get().map((StudentInGroup studentInGroup)->{Car car=new Car();car.setStudentInGroup(studentInGroup);return car;}).collect(Collectors.groupingBy(Car::getStudentInGroup));
+        System.out.println(stringStudentInGroupMap37);
         //
+        Map<String, List<Car<StudentInGroup>>> stringStudentInGroupMap38= studentInGroupStreamSupplier.get().map((StudentInGroup studentInGroup)->{Car<StudentInGroup> car=new Car<StudentInGroup>();car.setStudentInGroup(studentInGroup);return car;}).collect(Collectors.groupingBy(car->car.getStudentInGroup().map(s -> s.getName()).orElse("none")));
+        System.out.println(stringStudentInGroupMap38);
 
     }
 }
