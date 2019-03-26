@@ -257,6 +257,10 @@ public class StreamsTest3 {
         Map<Boolean,Map<Integer,List<StudentInGroup>>> stringStudentInGroupMap36 = studentInGroupStreamSupplier.<StudentInGroup>get().collect(Collectors.partitioningBy(StudentInGroup::isGirl,Collectors.groupingBy(StudentInGroup::getAge)));
         System.out.println(stringStudentInGroupMap36);
 
+        //List<Car> cars=studentInGroupStreamSupplier.get().map(Car::new).collect(Collectors.toList()); //not possible if there is no StudentInGroup in constructor as argument
+        List<Car> cars=studentInGroupStreamSupplier.get().map((StudentInGroup studentInGroup)->{Car car=new Car();car.setStudentInGroup(studentInGroup);return car;}).collect(Collectors.toList());
+        System.out.println(cars);
+
         //
 
     }
