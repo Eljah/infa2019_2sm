@@ -267,5 +267,9 @@ public class StreamsTest3 {
         Map<String, List<Car<StudentInGroup>>> stringStudentInGroupMap38= studentInGroupStreamSupplier.get().map((StudentInGroup studentInGroup)->{Car<StudentInGroup> car=new Car<StudentInGroup>();car.setStudentInGroup(studentInGroup);return car;}).collect(Collectors.groupingBy(car->car.getStudentInGroup().map(s -> s.getName()).orElse("none")));
         System.out.println(stringStudentInGroupMap38);
 
+        List<Integer> intList=Arrays.asList(1, 2, 3);
+        Stream<Integer> intStream1=intList.stream();
+        IntStream intStream2=intStream1.mapToInt(Integer::intValue);
+
     }
 }
