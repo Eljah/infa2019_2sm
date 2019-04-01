@@ -21,7 +21,7 @@ public class FileTest {
         //File file=new File("file:/test.txt");
         File file = null;
         try {
-            file = new File(new URI("file:/D:/Java/projects/infa2019_2sm/test.txt"));
+            file = new File(new URI("file:/C:/java2018/infa2019_2sm/test.txt"));
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class FileTest {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
+//
         System.out.println(file.length());
         System.out.println(file.getParentFile());
         System.out.println(file.getFreeSpace());
@@ -49,7 +49,7 @@ public class FileTest {
         System.out.println(file.lastModified());
         Path filePath = file.toPath();
         try {
-            System.out.println(filePath.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByName("ilya").getName());
+            System.out.println(filePath.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByName("leon").toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -59,32 +59,42 @@ public class FileTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+//
         System.out.println("creationTime: " + attr.creationTime());
         System.out.println("lastAccessTime: " + attr.lastAccessTime());
         System.out.println("lastModifiedTime: " + attr.lastModifiedTime());
+//
+        file.setReadOnly();
 
-        //file.setReadOnly();
-
+//
         file.setExecutable(true, true);
-
-
+//
+//
         File directory = file.getParentFile();
         System.out.println(directory.getAbsolutePath());
         System.out.println(directory.isDirectory());
         for (File dirFile : directory.listFiles()) {
             System.out.println(dirFile);
         }
-
-
+//
+//
         System.out.println();
 
-        for (File dirFile : directory.listFiles(new FileFilter() {
-            @Override
-            public boolean accept(File pathname) {
-                return pathname.toString().contains("txt");
+        for (File dirFile : directory.listFiles(e -> {
+            if(!e.canRead()){
+               return false;
             }
+            boolean flag = false;
+           try{
+                flag = new BufferedReader(new FileReader(e)).lines().anyMatch(s -> s.contains("Hello"));
+            }
+            catch(IOException t){
+               //  t.printStackTrace();
+            return false;
+            }
+            return flag;
         })) {
+
             try ( BufferedReader reader = new BufferedReader(new FileReader(dirFile))) {
                 System.out.println(dirFile);
 
