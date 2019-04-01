@@ -64,69 +64,105 @@ public class FileTest {
         System.out.println("lastAccessTime: " + attr.lastAccessTime());
         System.out.println("lastModifiedTime: " + attr.lastModifiedTime());
 
-
         //file.setReadOnly();
 
+        file.setExecutable(true, true);
 
-        File file2 = new File("test3.txt");
-        try {
-            System.out.println(file2.createNewFile());
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        File directory = file.getParentFile();
+        System.out.println(directory.getAbsolutePath());
+        System.out.println(directory.isDirectory());
+        for (File dirFile : directory.listFiles()) {
+            System.out.println(dirFile);
         }
 
-        FileChannel channel = null;
-        FileLock lock = null;
-        try {
-            channel = new RandomAccessFile(file2, "rw").getChannel();
-            //FileChannel channel = new RandomAccessFile(file, "r").getChannel();
-            //lock = channel.lock(0, 10, false);
-            //lock = channel.lock(0, 10, true);
-            lock = channel.lock();
 
-            System.out.println("Lock is shared " + lock.isShared());
-            System.out.println("Lock is valid " + lock.isValid());
-            System.out.println(lock.position());
-            System.out.println(lock.size());
+        System.out.println();
 
-//            try {
-//                lock = channel.tryLock();
-//            } catch (OverlappingFileLockException e) {
-//                e.printStackTrace();
-//            }
-
-            while (true) {
-                Thread.sleep(1000);
-                String str = "Hello\n";
-//                try (FileWriter fw = new FileWriter(file2,true);
-//                     BufferedWriter bw = new BufferedWriter(fw);
-//                     PrintWriter out = new PrintWriter(bw)) {
-//                    out.println(str);
-//                    out.flush();
-//                    out.close();
-//                    //more code
-//                } catch (IOException e) {
-//                    //exception handling left as an exercise for the reader
-//                    e.printStackTrace();
-//                }
-
-                channel.position(channel.size());
-                channel.write(ByteBuffer.wrap(str.getBytes()));
-                System.out.println("We have wrote "+str+" to the file");
+        for (File dirFile : directory.listFiles(new FileFilter() {
+            @Override
+            public boolean accept(File pathname) {
+                return pathname.toString().contains("txt");
             }
+        })) {
+            try ( BufferedReader reader = new BufferedReader(new FileReader(dirFile))) {
+                System.out.println(dirFile);
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (lock != null) {
-                    lock.release();
+                while (reader.ready()) {
+                    String currentLine = reader.readLine();
+                    System.out.println(currentLine);
                 }
-                channel.close();
-            } catch (IOException exception) {
-                exception.printStackTrace();
+                //reader.close();
+            } catch (IOException i) {
+                i.printStackTrace();
+            } finally {
+
             }
         }
+
+        //todo lambda exercises
+
+//
+//        File file2 = new File("test3.txt");
+//        try {
+//            System.out.println(file2.createNewFile());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        FileChannel channel = null;
+//        FileLock lock = null;
+//        try {
+//            channel = new RandomAccessFile(file2, "rw").getChannel();
+//            channel.force(true);
+//            //FileChannel channel = new RandomAccessFile(file, "r").getChannel();
+//            //lock = channel.lock(0, 10, false);
+//            //lock = channel.lock(0, 10, true);
+////            lock = channel.lock();
+//
+////            System.out.println("Lock is shared " + lock.isShared());
+////            System.out.println("Lock is valid " + lock.isValid());
+////            System.out.println(lock.position());
+////            System.out.println(lock.size());
+//
+////            try {
+////                lock = channel.tryLock();
+////            } catch (OverlappingFileLockException e) {
+////                e.printStackTrace();
+////            }
+//
+//            while (true) {
+//                Thread.sleep(1000);
+//                String str = "Hello3\n";
+////                try (FileWriter fw = new FileWriter(file,true);
+////                     BufferedWriter bw = new BufferedWriter(fw);
+////                     PrintWriter out = new PrintWriter(bw)) {
+////                    out.println(str);
+////                    //more code
+////                } catch (IOException e) {
+////                    //exception handling left as an exercise for the reader
+////                    e.printStackTrace();
+////                }
+//
+//                channel.position(channel.size());
+//                //channel.position(0);
+//                channel.write(ByteBuffer.wrap(str.getBytes()));
+//                System.out.println("We have wrote "+str+" to the file");
+//            }
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            try {
+//                if (lock != null) {
+//                    lock.release();
+//                }
+//                channel.close();
+//            } catch (IOException exception) {
+//                exception.printStackTrace();
+//            }
+//        }
+
 
     }
 }
