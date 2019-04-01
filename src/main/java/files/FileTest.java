@@ -4,6 +4,7 @@ import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
@@ -18,7 +19,7 @@ public class FileTest {
     public static void main(String[] args) {
         //File file=new File("test.txt");
         //File file=new File("file:/test.txt");
-        File file= null;
+        File file = null;
         try {
             file = new File(new URI("file:/D:/Java/projects/infa2019_2sm/test.txt"));
         } catch (URISyntaxException e) {
@@ -67,23 +68,24 @@ public class FileTest {
         //file.setReadOnly();
 
 
-        File file2=new File("test3.txt");
+        File file2 = new File("test3.txt");
         try {
             System.out.println(file2.createNewFile());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        FileChannel channel=null;
-        FileLock lock=null;
+        FileChannel channel = null;
+        FileLock lock = null;
         try {
             channel = new RandomAccessFile(file2, "rw").getChannel();
             //FileChannel channel = new RandomAccessFile(file, "r").getChannel();
-            lock = channel.lock(0,10,false);
-            //lock = channel.lock();
+            //lock = channel.lock(0, 10, false);
+            //lock = channel.lock(0, 10, true);
+            lock = channel.lock();
 
-            System.out.println("Lock is shared "+lock.isShared());
-            System.out.println("Lock is valid "+lock.isValid());
+            System.out.println("Lock is shared " + lock.isShared());
+            System.out.println("Lock is valid " + lock.isValid());
             System.out.println(lock.position());
             System.out.println(lock.size());
 
@@ -93,25 +95,35 @@ public class FileTest {
 //                e.printStackTrace();
 //            }
 
-            while (true)
-            {
-                Thread.sleep(10000);
+            while (true) {
+                Thread.sleep(1000);
+                String str = "Hello\n";
+//                try (FileWriter fw = new FileWriter(file2,true);
+//                     BufferedWriter bw = new BufferedWriter(fw);
+//                     PrintWriter out = new PrintWriter(bw)) {
+//                    out.println(str);
+//                    out.flush();
+//                    out.close();
+//                    //more code
+//                } catch (IOException e) {
+//                    //exception handling left as an exercise for the reader
+//                    e.printStackTrace();
+//                }
 
+                channel.position(channel.size());
+                channel.write(ByteBuffer.wrap(str.getBytes()));
+                System.out.println("We have wrote "+str+" to the file");
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }
-        finally
-        {
-           try {
-               if (lock != null) {
-                   lock.release();
-               }
-               channel.close();
-           }
-           catch (IOException exception)
-            {
+        } finally {
+            try {
+                if (lock != null) {
+                    lock.release();
+                }
+                channel.close();
+            } catch (IOException exception) {
                 exception.printStackTrace();
             }
         }
