@@ -7,6 +7,9 @@ import java.net.URISyntaxException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.nio.channels.OverlappingFileLockException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.BasicFileAttributes;
 
 /**
  * Created by eljah32 on 4/1/2019.
@@ -42,6 +45,26 @@ public class FileTest {
         System.out.println(file.isHidden());
         System.out.println(file.isDirectory());
         System.out.println(file.isFile());
+        System.out.println(file.lastModified());
+        Path filePath = file.toPath();
+        try {
+            System.out.println(filePath.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByName("ilya").getName());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BasicFileAttributes attr = null;
+        try {
+            attr = Files.readAttributes(filePath, BasicFileAttributes.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("creationTime: " + attr.creationTime());
+        System.out.println("lastAccessTime: " + attr.lastAccessTime());
+        System.out.println("lastModifiedTime: " + attr.lastModifiedTime());
+
+
+        //file.setReadOnly();
 
 
         File file2=new File("test3.txt");
@@ -54,10 +77,10 @@ public class FileTest {
         FileChannel channel=null;
         FileLock lock=null;
         try {
-            channel = new RandomAccessFile(file, "rw").getChannel();
+            channel = new RandomAccessFile(file2, "rw").getChannel();
             //FileChannel channel = new RandomAccessFile(file, "r").getChannel();
-            //lock = channel.lock(11,100,true);
-            lock = channel.lock();
+            lock = channel.lock(0,10,false);
+            //lock = channel.lock();
 
             System.out.println("Lock is shared "+lock.isShared());
             System.out.println("Lock is valid "+lock.isValid());
@@ -72,6 +95,7 @@ public class FileTest {
 
             while (true)
             {
+                Thread.sleep(10000);
 
             }
 
