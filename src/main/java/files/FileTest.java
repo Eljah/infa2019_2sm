@@ -143,8 +143,19 @@ public class FileTest {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        try {
+            System.out.println("read file "+fileReader.read());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         BufferedReader bufferedReader=new BufferedReader(fileReader);
+        try {
+            System.out.println("First read line "+bufferedReader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         //just to remind that the below is possible!
         Comparable comparable= new Student("2","2")::compareTo;
 
@@ -173,6 +184,7 @@ public class FileTest {
                 //c.close();
                 System.out.println(c.toString());
                 System.out.println("do something");
+                System.out.println("Second read line "+bufferedReader.readLine());
                 //throw new RuntimeException("Interrupting the try with cloaseble resource");
             }
         } catch (IOException e) {
@@ -181,6 +193,7 @@ public class FileTest {
             System.out.println("And try if from finally");
         }
 
+        //todo to talk about transient keyword in File
 //
 //        File file2 = new File("test3.txt");
 //        try {
