@@ -1,5 +1,10 @@
 package files;
 
+import com.sun.org.apache.xpath.internal.SourceTree;
+import com.sun.org.apache.xpath.internal.functions.Function;
+import containers.map.Student;
+import containers.streams.StudentInGroup;
+
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -17,14 +22,14 @@ import java.nio.file.attribute.BasicFileAttributes;
  */
 public class FileTest {
     public static void main(String[] args) {
-        //File file=new File("test.txt");
+        File file=new File("test.txt");
         //File file=new File("file:/test.txt");
-        File file = null;
-        try {
-            file = new File(new URI("file:/C:/java2018/infa2019_2sm/test.txt"));
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+//        File file = null;
+//        try {
+//            file = new File(new URI("file:/D:/Java/projects/infa2019_2sm/test.txt"));
+//        } catch (URISyntaxException e) {
+//            e.printStackTrace();
+//        }
         System.out.println(file.exists());
         System.out.println(file.getName());
         System.out.println(file.getAbsolutePath());
@@ -49,7 +54,7 @@ public class FileTest {
         System.out.println(file.lastModified());
         Path filePath = file.toPath();
         try {
-            System.out.println(filePath.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByName("leon").toString());
+            System.out.println(filePath.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByName("ilya").toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,8 +75,11 @@ public class FileTest {
         file.setExecutable(true, true);
 //
 //
-        File directory = file.getParentFile();
-        System.out.println(directory.getAbsolutePath());
+        //File directory = file.getParentFile();
+        System.out.println("Workaround: "+new File(file.getAbsolutePath()).getParent());
+        File directory=new File(new File(file.getAbsolutePath()).getParent());
+        //File directory = new File(file.getParentFile().getAbsolutePath());
+        System.out.println(directory.getAbsolutePath()); //null for the file initialized as relative in the working directory!
         System.out.println(directory.isDirectory());
         for (File dirFile : directory.listFiles()) {
             System.out.println(dirFile);
@@ -111,6 +119,67 @@ public class FileTest {
         }
 
         //todo lambda exercises
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+
+
+        try (Closeable closeable=new Cloooze();)
+        {
+            System.out.println("Doing something normal");
+            //throw new RuntimeException("Interrupting the try with cloaseble resource");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileReader fileReader=null;
+        try {
+            fileReader=new FileReader("test.txt");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        BufferedReader bufferedReader=new BufferedReader(fileReader);
+        //just to remind that the below is possible!
+        Comparable comparable= new Student("2","2")::compareTo;
+
+        comparable.toString();
+        comparable.compareTo(new Student("3","3"));
+
+
+        Closeable c2=bufferedReader::close;
+
+        try {
+            //try(new Cloooze())
+            try(Closeable c=new Cloooze())
+//            try(Closeable c=new Closeable() {
+//                @Override
+//                public void close() throws IOException {
+//
+//                }
+//            })
+            //try(Closeable c=new Cloooze())
+            //try(Closeable c=new Cloooze()::close)
+            //try(Closeable c=bufferedReader::close;)
+            //try(Closeable c=file::deleteOnExit;)
+            //try(Closeable c=comparable::toString;)
+            //try(Closeable c=new Student("4","4")::toString;)
+            {
+                //c.close();
+                System.out.println(c.toString());
+                System.out.println("do something");
+                //throw new RuntimeException("Interrupting the try with cloaseble resource");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("And try if from finally");
+        }
 
 //
 //        File file2 = new File("test3.txt");
@@ -174,5 +243,19 @@ public class FileTest {
 //        }
 
 
+    }
+
+    public static class Cloooze implements Closeable
+    {
+
+        public Cloooze()
+        {
+            System.out.println("Doing something inside resource constructor");
+        }
+
+        @Override
+        public void close() throws IOException {
+            System.out.println("Closing! Closing!");
+        }
     }
 }
