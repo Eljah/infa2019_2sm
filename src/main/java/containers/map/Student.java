@@ -30,6 +30,8 @@ public class Student implements Comparable {
     }
 
     public int compareTo(Object o) {
+
+        System.out.println("Doing student comparation");
         return secondName.compareTo(((Student)o).getSecondName());
     }
 

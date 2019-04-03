@@ -54,7 +54,7 @@ public class FileTest {
         System.out.println(file.lastModified());
         Path filePath = file.toPath();
         try {
-            System.out.println(filePath.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByName("ilya").toString());
+            System.out.println(filePath.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByName("leon").toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -200,97 +200,118 @@ public class FileTest {
         comparable.compareTo(new Student("3","3"));
 
 //
-//        Closeable c2=bufferedReader::close;
+        Closeable c2=bufferedReader::close;
+
+        Closeable c3=new Closeable() {
+            @Override
+            public void close() throws IOException {
+                bufferedReader.close();
+            }
+        };
+
+
+        System.out.println();
+
+        try {
+            //try(new Cloooze())
+            //try(Closeable c=new Cloooze())
+//            try(Closeable c=new Closeable() {
+//                {
+//                    System.out.println("Load");
+//                }
 //
+//                @Override
+//                public void close() throws IOException {
+//                    System.out.println("Close!");
+//                }
+//            })
+            try(Closeable c=new Cloooze())
+            //try(Closeable c=new Cloooze()::close)
+             //try(Closeable c=bufferedReader::close;)
+            //try(Closeable c=file::deleteOnExit;)
+            //try(Closeable c=comparable1::toString;)
+            //try(Closeable c=new Student("4","4")::toString;)
+            {
+                //c.close();
+                System.out.println(bufferedReader.readLine());
+                System.out.println(c.toString());
+                System.out.println("do something");
+                System.out.println("Third read line "+bufferedReader.readLine());
+                //throw new RuntimeException("Interrupting the try with cloaseble resource");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            System.out.println("And try if from finally");
+        }
+
 //        try {
-//            //try(new Cloooze())
-//            try(Closeable c=new Cloooze())
-////            try(Closeable c=new Closeable() {
-////                @Override
-////                public void close() throws IOException {
-////
-////                }
-////            })
-//            //try(Closeable c=new Cloooze())
-//            //try(Closeable c=new Cloooze()::close)
-//            //try(Closeable c=bufferedReader::close;)
-//            //try(Closeable c=file::deleteOnExit;)
-//            //try(Closeable c=comparable::toString;)
-//            //try(Closeable c=new Student("4","4")::toString;)
-//            {
-//                //c.close();
-//                System.out.println(c.toString());
-//                System.out.println("do something");
-//                System.out.println("Second read line "+bufferedReader.readLine());
-//                //throw new RuntimeException("Interrupting the try with cloaseble resource");
-//            }
+//            System.out.println("5th line "+bufferedReader.readLine());
 //        } catch (IOException e) {
 //            e.printStackTrace();
-//        } finally {
-//            System.out.println("And try if from finally");
 //        }
 
         //todo to talk about transient keyword in File
 //
-//        File file2 = new File("test3.txt");
-//        try {
-//            System.out.println(file2.createNewFile());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//        FileChannel channel = null;
-//        FileLock lock = null;
-//        try {
-//            channel = new RandomAccessFile(file2, "rw").getChannel();
-//            channel.force(true);
-//            //FileChannel channel = new RandomAccessFile(file, "r").getChannel();
-//            //lock = channel.lock(0, 10, false);
-//            //lock = channel.lock(0, 10, true);
-////            lock = channel.lock();
-//
-////            System.out.println("Lock is shared " + lock.isShared());
-////            System.out.println("Lock is valid " + lock.isValid());
-////            System.out.println(lock.position());
-////            System.out.println(lock.size());
-//
-////            try {
-////                lock = channel.tryLock();
-////            } catch (OverlappingFileLockException e) {
-////                e.printStackTrace();
-////            }
-//
-//            while (true) {
-//                Thread.sleep(1000);
-//                String str = "Hello3\n";
-////                try (FileWriter fw = new FileWriter(file,true);
-////                     BufferedWriter bw = new BufferedWriter(fw);
-////                     PrintWriter out = new PrintWriter(bw)) {
-////                    out.println(str);
-////                    //more code
-////                } catch (IOException e) {
-////                    //exception handling left as an exercise for the reader
-////                    e.printStackTrace();
-////                }
-//
-//                channel.position(channel.size());
-//                //channel.position(0);
-//                channel.write(ByteBuffer.wrap(str.getBytes()));
-//                System.out.println("We have wrote "+str+" to the file");
-//            }
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
+        File file2 = new File("test3.txt");
+        try {
+            System.out.println(file2.createNewFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        FileChannel channel = null;
+        FileLock lock = null;
+        try {
+            channel = new RandomAccessFile(file2, "rw").getChannel();
+            channel.force(true);
+            //FileChannel channel = new RandomAccessFile(file, "r").getChannel();
+            lock = channel.lock(0, 10, false);
+            //lock = channel.lock(0, 10, true);
+//            lock = channel.lock();
+
+//            System.out.println("Lock is shared " + lock.isShared());
+//            System.out.println("Lock is valid " + lock.isValid());
+//            System.out.println(lock.position());
+//            System.out.println(lock.size());
+
 //            try {
-//                if (lock != null) {
-//                    lock.release();
-//                }
-//                channel.close();
-//            } catch (IOException exception) {
-//                exception.printStackTrace();
+//                lock = channel.tryLock();
+//            } catch (OverlappingFileLockException e) {
+//                e.printStackTrace();
 //            }
-//        }
+
+            while (true) {
+                Thread.sleep(1000);
+                String str = "Hello3\n";
+//                try (FileWriter fw = new FileWriter(file,true);
+//                     BufferedWriter bw = new BufferedWriter(fw);
+//                     PrintWriter out = new PrintWriter(bw)) {
+//                    out.println(str);
+//                    //more code
+//                } catch (IOException e) {
+//                    //exception handling left as an exercise for the reader
+//                    e.printStackTrace();
+//                }
+
+                channel.position(channel.size());
+                //channel.position(0);
+                channel.write(ByteBuffer.wrap(str.getBytes()));
+                System.out.println("We have wrote "+str+" to the file");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (lock != null) {
+                    lock.release();
+                }
+                channel.close();
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
 
 
     }
@@ -300,12 +321,12 @@ public class FileTest {
 
         public Cloooze()
         {
-            System.err.println("Doing something inside resource constructor");
+            System.out.println("Doing something inside resource constructor");
         }
 
         @Override
         public void close() throws IOException {
-            System.err.println("Closing! Closing!");
+            System.out.println("Closing! Closing!");
         }
     }
 }
