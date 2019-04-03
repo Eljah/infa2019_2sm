@@ -130,10 +130,24 @@ public class FileTest {
 
         try (Closeable closeable=new Cloooze();)
         {
-            System.out.println("Doing something normal");
+            System.err.println("Doing something normal");
             //throw new RuntimeException("Interrupting the try with cloaseble resource");
 
         } catch (IOException e) {
+            System.err.println("Before the stacktrace shown for IO");
+            //e.printStackTrace();
+        }
+        catch (RuntimeException e) {
+            System.err.println("Before the stacktrace shown for Runtime");
+            e.printStackTrace();
+        }
+        finally {
+            System.err.println("Doing something inside the finally block");
+        }
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
@@ -148,50 +162,73 @@ public class FileTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+//
         BufferedReader bufferedReader=new BufferedReader(fileReader);
         try {
-            System.out.println("First read line "+bufferedReader.readLine());
+            String gotFromReadLine=bufferedReader.readLine();
+            System.out.println("First read line "+gotFromReadLine);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        try {
+            System.out.println("Second read line "+bufferedReader.readLine());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+//
         //just to remind that the below is possible!
         Comparable comparable= new Student("2","2")::compareTo;
 
-        comparable.toString();
+        Comparable comparable1=new Comparable() {
+            @Override
+            public int compareTo(Object o) {
+                return new Student("2","2").compareTo(o);
+            }
+
+            @Override
+            public String toString()
+            {
+                System.out.println("Retuning to String of anonymously created class");
+                return "Hehe!";
+            }
+        };
+
+        System.out.println(comparable1.toString());
+        comparable1.compareTo(new Student("5","5"));
+
+        System.out.println(comparable.toString());
         comparable.compareTo(new Student("3","3"));
 
-
-        Closeable c2=bufferedReader::close;
-
-        try {
-            //try(new Cloooze())
-            try(Closeable c=new Cloooze())
-//            try(Closeable c=new Closeable() {
-//                @Override
-//                public void close() throws IOException {
 //
-//                }
-//            })
-            //try(Closeable c=new Cloooze())
-            //try(Closeable c=new Cloooze()::close)
-            //try(Closeable c=bufferedReader::close;)
-            //try(Closeable c=file::deleteOnExit;)
-            //try(Closeable c=comparable::toString;)
-            //try(Closeable c=new Student("4","4")::toString;)
-            {
-                //c.close();
-                System.out.println(c.toString());
-                System.out.println("do something");
-                System.out.println("Second read line "+bufferedReader.readLine());
-                //throw new RuntimeException("Interrupting the try with cloaseble resource");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            System.out.println("And try if from finally");
-        }
+//        Closeable c2=bufferedReader::close;
+//
+//        try {
+//            //try(new Cloooze())
+//            try(Closeable c=new Cloooze())
+////            try(Closeable c=new Closeable() {
+////                @Override
+////                public void close() throws IOException {
+////
+////                }
+////            })
+//            //try(Closeable c=new Cloooze())
+//            //try(Closeable c=new Cloooze()::close)
+//            //try(Closeable c=bufferedReader::close;)
+//            //try(Closeable c=file::deleteOnExit;)
+//            //try(Closeable c=comparable::toString;)
+//            //try(Closeable c=new Student("4","4")::toString;)
+//            {
+//                //c.close();
+//                System.out.println(c.toString());
+//                System.out.println("do something");
+//                System.out.println("Second read line "+bufferedReader.readLine());
+//                //throw new RuntimeException("Interrupting the try with cloaseble resource");
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        } finally {
+//            System.out.println("And try if from finally");
+//        }
 
         //todo to talk about transient keyword in File
 //
@@ -263,12 +300,12 @@ public class FileTest {
 
         public Cloooze()
         {
-            System.out.println("Doing something inside resource constructor");
+            System.err.println("Doing something inside resource constructor");
         }
 
         @Override
         public void close() throws IOException {
-            System.out.println("Closing! Closing!");
+            System.err.println("Closing! Closing!");
         }
     }
 }
