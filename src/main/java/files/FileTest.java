@@ -88,35 +88,35 @@ public class FileTest {
 //
         System.out.println();
 
-        for (File dirFile : directory.listFiles(e -> {
-            if(!e.canRead()){
-               return false;
-            }
-            boolean flag = false;
-           try{
-                flag = new BufferedReader(new FileReader(e)).lines().anyMatch(s -> s.contains("Hello"));
-            }
-            catch(IOException t){
-               //  t.printStackTrace();
-            return false;
-            }
-            return flag;
-        })) {
-
-            try ( BufferedReader reader = new BufferedReader(new FileReader(dirFile))) {
-                System.out.println(dirFile);
-
-                while (reader.ready()) {
-                    String currentLine = reader.readLine();
-                    System.out.println(currentLine);
-                }
-                //reader.close();
-            } catch (IOException i) {
-                i.printStackTrace();
-            } finally {
-
-            }
-        }
+//        for (File dirFile : directory.listFiles(e -> {
+//            if(!e.canRead()){
+//               return false;
+//            }
+//            boolean flag = false;
+//           try{
+//                flag = new BufferedReader(new FileReader(e)).lines().anyMatch(s -> s.contains("Hello"));
+//            }
+//            catch(IOException t){
+//               //  t.printStackTrace();
+//            return false;
+//            }
+//            return flag;
+//        })) {
+//
+//            try ( BufferedReader reader = new BufferedReader(new FileReader(dirFile))) {
+//                System.out.println(dirFile);
+//
+//                while (reader.ready()) {
+//                    String currentLine = reader.readLine();
+//                    System.out.println(currentLine);
+//                }
+//                //reader.close();
+//            } catch (IOException i) {
+//                i.printStackTrace();
+//            } finally {
+//
+//            }
+//        }
 
         //todo lambda exercises
 
@@ -266,8 +266,8 @@ public class FileTest {
             channel = new RandomAccessFile(file2, "rw").getChannel();
             channel.force(true);
             //FileChannel channel = new RandomAccessFile(file, "r").getChannel();
-            lock = channel.lock(0, 10, false);
-            //lock = channel.lock(0, 10, true);
+            //lock = channel.lock(0, 10, false);
+//            lock = channel.lock(0, 10, true);
 //            lock = channel.lock();
 
 //            System.out.println("Lock is shared " + lock.isShared());
@@ -275,15 +275,18 @@ public class FileTest {
 //            System.out.println(lock.position());
 //            System.out.println(lock.size());
 
-//            try {
-//                lock = channel.tryLock();
-//            } catch (OverlappingFileLockException e) {
-//                e.printStackTrace();
-//            }
+            try {
+                while (true) {
+                    lock = channel.tryLock();
+                    System.out.println("Waiting for lock released");
+                }
+            } catch (OverlappingFileLockException e) {
+                e.printStackTrace();
+            }
 
             while (true) {
                 Thread.sleep(1000);
-                String str = "Hello3\n";
+                String str = "Hello1\n";
 //                try (FileWriter fw = new FileWriter(file,true);
 //                     BufferedWriter bw = new BufferedWriter(fw);
 //                     PrintWriter out = new PrintWriter(bw)) {
