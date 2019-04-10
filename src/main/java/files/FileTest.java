@@ -275,14 +275,14 @@ public class FileTest {
 //            System.out.println(lock.position());
 //            System.out.println(lock.size());
 
-            try {
-                while (true) {
-                    lock = channel.tryLock();
-                    System.out.println("Waiting for lock released");
-                }
-            } catch (OverlappingFileLockException e) {
-                e.printStackTrace();
-            }
+//            try {
+//                while (true) {
+//                    lock = channel.tryLock();
+//                    System.out.println("Waiting for lock released");
+//                }
+//            } catch (OverlappingFileLockException e) {
+//                e.printStackTrace();
+//            }
 
             while (true) {
                 Thread.sleep(1000);
