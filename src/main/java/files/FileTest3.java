@@ -71,6 +71,8 @@ public class FileTest3 {
 
             System.out.println(charBuffer.toString());
             //fileChannel.close();
+            //mappedByteBuffer.flip();
+            mappedByteBuffer.clear();
             unmap(mappedByteBuffer);
         }
 
