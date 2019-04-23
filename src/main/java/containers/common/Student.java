@@ -1,8 +1,10 @@
 package containers.common;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Student implements Comparable
+public class Student implements //Serializable,
+        Comparable
 {
     public String name;
 

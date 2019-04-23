@@ -29,13 +29,17 @@ public class FileTest4 {
         System.setOut(ps_console);
         System.out.println("Console again !!");
 
+        //serialization
 
-        ObjectToSerialize p1=new ObjectToSerialize("Jon Snow", 22,true);
+        ObjectToSerialize p1=new ObjectToSerialize("Jon Snow", 22,false);
         ObjectToSerialize p2=new ObjectToSerialize("Daenerys Targaryen", 21,true);
 
         try {
             FileOutputStream f = new FileOutputStream(new File("myObjects.txt"));
             ObjectOutputStream o = new ObjectOutputStream(f);
+
+            //p1.objectToSerialize=p1;
+            //p2.objectToSerialize=p1;
 
             // Write objects to file
             o.writeObject(p1);
