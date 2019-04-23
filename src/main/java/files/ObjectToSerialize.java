@@ -11,6 +11,10 @@ public class ObjectToSerialize extends Student implements
         Serializable//,
         //Externalizable
         {
+            {
+                System.out.println("Do we have something in the static block?");
+            }
+
 
     private static String staticExample="static";
 
