@@ -1,5 +1,8 @@
 package files;
 
+import static java.nio.file.StandardOpenOption.*;
+import static java.lang.System.out;
+
 import java.io.IOException;
 import java.net.URI;
 import java.nio.ByteBuffer;
@@ -9,6 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
 
 /**
  * Created by eljah32 on 4/23/2019.
@@ -23,30 +27,34 @@ public class FileTest6 {
         AsynchronousFileChannel fileChannel = null;
         try {
             fileChannel = AsynchronousFileChannel.open(
-                    path, StandardOpenOption.READ);
+                    path, WRITE, CREATE
+                  //  , StandardOpenOption.DELETE_ON_CLOSE
+            );
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         ByteBuffer buffer = ByteBuffer.allocate(1024);
 
-        Future<Integer> operation = fileChannel.read(buffer, 0);
+        buffer.put("hello world".getBytes());
+        buffer.flip();
+
+        Future<Integer> operation = fileChannel.write(buffer, 0);
+        buffer.clear();
 
         while (!operation.isDone())
         {
-            System.out.println("Output!");
+            out.println("Output!");
         }
+
         // run other code as operation continues in background
         try {
-            operation.get();
+            System.out.println(operation.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
             e.printStackTrace();
         }
-
-        String fileContent = new String(buffer.array()).trim();
-        buffer.clear();
 
         AsynchronousFileChannel fileChannel2 = null;
         try {
@@ -58,7 +66,7 @@ public class FileTest6 {
 
         ByteBuffer buffer2 = ByteBuffer.allocate(1024);
 
-        Future<Integer> operation2 = fileChannel.read(buffer2, 0);
+        Future<Integer> operation2 = fileChannel2.read(buffer2, 0);
 
         while (!operation2.isDone())
         {
@@ -67,7 +75,7 @@ public class FileTest6 {
 
         // run other code as operation continues in background
         try {
-            operation2.get();
+            System.out.println(operation2.get());
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
