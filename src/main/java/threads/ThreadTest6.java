@@ -29,26 +29,29 @@ public class ThreadTest6 extends TimerTask {
     public static void main(String[] args) {
         Timer timer=new Timer();
         TimerTask timerTask=new ThreadTest6();
+        TimerTask timerTask0=new ThreadTest6();
 
         long delay = 1000L;
         timer.schedule(timerTask, delay);
+        timer.schedule(timerTask0, delay+delay);
+
         //timer.schedule(timerTask, delay);
         System.out.println("First test initiated");
 
         //timerTask.cancel();
 
         try {
-            Thread.sleep(1500);
+            Thread.sleep(2500);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         //timerTask.cancel();
         timer.cancel();
-
+//
         System.out.println("First timer cancel initiated");
         //timer.cancel();
         //timer.schedule(timerTask, delay);
-
+//
         System.out.println("At the fixed rate");
         System.out.println();
 
@@ -67,7 +70,7 @@ public class ThreadTest6 extends TimerTask {
         timer2.purge();
         timer2.cancel();
         timerTask2.cancel();
-
+//
 //        Timer timer3=new Timer();
 //        System.out.println("Task reuse");
 //        System.out.println();
