@@ -2,14 +2,14 @@ package threads;
 
 import java.util.concurrent.*;
 
-public class ThreadTest5 implements Callable {
+public class ThreadTest5 implements Callable<String> {
     @Override
-    public Object call() throws Exception {
+    public String call() throws Exception {
         System.out.println("Starting inside the callable");
         Thread.sleep(1000);
         System.out.println("Stopping inside the callable");
-        throw new RuntimeException("Runtime exception from inside");
-        //return "Success";
+        //throw new RuntimeException("Runtime exception from inside");
+        return "Success";
     }
 
     public static void main(String[] args) {
