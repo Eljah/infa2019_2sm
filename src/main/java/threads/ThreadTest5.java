@@ -9,13 +9,15 @@ public class ThreadTest5 implements Callable<String> {
         Thread.sleep(1000);
         System.out.println("Stopping inside the callable");
         //throw new RuntimeException("Runtime exception from inside");
+        //int a=1/0;
         return "Success";
     }
 
     public static void main(String[] args) {
         ExecutorService executorService= Executors.newSingleThreadExecutor();
         Future<String> futureResult=executorService.submit(new ThreadTest5());
-        executorService.shutdown();
+        //executorService.shutdown();
+        //executorService.shutdownNow();
         System.out.println("Print after the async calculation was strated");
         while (!futureResult.isDone())
         {
@@ -27,5 +29,6 @@ public class ThreadTest5 implements Callable<String> {
                 e.printStackTrace();
             }
         }
+        executorService.shutdown();
     }
 }
