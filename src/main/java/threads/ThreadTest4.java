@@ -3,6 +3,7 @@ package threads;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class ThreadTest4 implements Runnable {
     String marker;
@@ -41,14 +42,20 @@ public class ThreadTest4 implements Runnable {
             System.out.println("Waiting for shutdow");
         }
         executor.shutdown();
-        //executor.execute(new ThreadTest4("Marker5"));
-
+        //executor.shutdownNow();
         System.out.println("After shutdown call");
 
+        //executor.execute(new ThreadTest4("Marker5"));
 
-        while (executor.isTerminated())
-        {
-            System.out.println("Waiting for shutdow complete");
+//        while (!executor.isTerminated())
+//        {
+//            System.out.println("Waiting for shutdow complete");
+//        }
+
+        try {
+            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.HOURS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
     }
