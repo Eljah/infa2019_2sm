@@ -14,11 +14,17 @@ public class ThreadTest8 implements Runnable {
 
     @Override
     public void run() {
+        int i=0;
         while (true) {
+            i++;
             int value = integerGenerator.getNext();
             if (value % 2 != 0) {
                 System.out.println(value + " " + value % 2);
                 System.exit(0);
+            }
+            if (i%1000==0)
+            {
+                System.out.println(value);
             }
         }
     }
@@ -29,7 +35,8 @@ public class ThreadTest8 implements Runnable {
         //IntegerGenerator integerGenerator=new IntegerGeneratorNonThreadSafe3();
         //IntegerGenerator integerGenerator=new IntegerGeneratorSynchronizedMethod();
         //IntegerGenerator integerGenerator=new IntegerGeneratorAtomicIncrement();
-        IntegerGenerator integerGenerator=new IntegerGeneratorSynchonizedBlock();
+        //IntegerGenerator integerGenerator=new IntegerGeneratorSynchonizedBlock();
+        IntegerGenerator integerGenerator=new IntegerGeneratorReentrantLock();
         Thread thread1=new Thread(new ThreadTest8(integerGenerator));
         Thread thread2=new Thread(new ThreadTest8(integerGenerator));
         Thread thread3=new Thread(new ThreadTest8(integerGenerator));
