@@ -20,11 +20,11 @@ public class ThreadTest8 implements Runnable {
             int value = integerGenerator.getNext();
             if (value % 2 != 0) {
                 System.out.println(value + " " + value % 2);
-                System.exit(0);
+                System.exit(-1);
             }
             if (i%1000==0)
             {
-                System.out.println(value);
+                //System.out.println(value);
             }
         }
     }

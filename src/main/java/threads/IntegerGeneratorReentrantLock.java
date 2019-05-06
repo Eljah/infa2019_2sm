@@ -10,7 +10,6 @@ public class IntegerGeneratorReentrantLock implements IntegerGenerator {
     int value = 0;
     Lock lock = new ReentrantLock();
 
-
     @Override
     public int getNext() {
 //        lock.lock();
@@ -19,6 +18,7 @@ public class IntegerGeneratorReentrantLock implements IntegerGenerator {
 //        lock.unlock();
 //        return value;
         lock.lock();
+
         try {
             value++;
             value++;

@@ -10,6 +10,7 @@ public class IntegerGeneratorNonThreadSafe1 implements IntegerGenerator{
     public int getNext(){
         value++;
         value++;
+        //value=value+2;
         return value;
     }
 
