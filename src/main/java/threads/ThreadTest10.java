@@ -36,7 +36,7 @@ public class ThreadTest10 implements Runnable {
 
         Thread thread1 = new Thread(new ThreadTest10(first, second,1));
         Thread thread2 = new Thread(new ThreadTest10(second, third,2));
-        Thread thread3 = new Thread(new ThreadTest10( third, first,3));
+        Thread thread3 = new Thread(new ThreadTest10(first, third,3));
 
         thread1.start();
         thread2.start();
