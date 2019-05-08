@@ -31,12 +31,12 @@ public class ThreadTest8 implements Runnable {
 
     public static void main(String[] args) {
         //IntegerGenerator integerGenerator=new IntegerGeneratorNonThreadSafe1();
-        //IntegerGenerator integerGenerator=new IntegerGeneratorNonThreadSafe2();
+        IntegerGenerator integerGenerator=new IntegerGeneratorNonThreadSafe2();
         //IntegerGenerator integerGenerator=new IntegerGeneratorNonThreadSafe3();
         //IntegerGenerator integerGenerator=new IntegerGeneratorSynchronizedMethod();
         //IntegerGenerator integerGenerator=new IntegerGeneratorAtomicIncrement();
         //IntegerGenerator integerGenerator=new IntegerGeneratorSynchonizedBlock();
-        IntegerGenerator integerGenerator=new IntegerGeneratorReentrantLock();
+        //IntegerGenerator integerGenerator=new IntegerGeneratorReentrantLock();
         Thread thread1=new Thread(new ThreadTest8(integerGenerator));
         Thread thread2=new Thread(new ThreadTest8(integerGenerator));
         Thread thread3=new Thread(new ThreadTest8(integerGenerator));
